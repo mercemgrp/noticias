@@ -1,0 +1,13 @@
+ion-segment.categories {
+  background-color: var(--ion-color-dark);
+  ion-label {
+    color: white;
+  }
+  .segment-button-checked {  
+    ion-label {
+      color: #42b9f1;
+    }
+    border-bottom: 1px solid #42b9f1;
+  
+  }
+}

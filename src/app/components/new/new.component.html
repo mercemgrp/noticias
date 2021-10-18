@@ -1,0 +1,25 @@
+<ion-card class="card" color="dark" *ngIf="article">
+  <ion-card-header class="card__header">
+    <ion-img *ngIf="article.urlToImage" class="card-img" [src]="article.urlToImage"></ion-img>
+    <ion-card-subtitle>
+      <span *ngIf="article.source?.name" class="card-subtitle">{{article.source.name }} </span></ion-card-subtitle>
+    <ion-card-title> <span class="card-title">{{ article.title}}</span></ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content class="card__body">
+    <ion-text>
+      {{ article.description}}
+    </ion-text>
+  </ion-card-content>
+  <div class="card__footer">
+    <ion-buttons>
+      <button ion-button icon-only (click)="onOpenLink(article.url)" class="add-button">
+        <ion-icon slot="end" name="add"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="onAddToFavorite()" class="heart-button">
+        <ion-icon slot="end" [name]="article.selected ? 'heart' : 'heart-outline'"></ion-icon>
+      </button>
+    </ion-buttons>
+    <div class="card__footer-border"></div>
+  </div>
+</ion-card>

@@ -1,0 +1,14 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="dark"> 
+    <ion-title>
+      <span class="color-blue">Favoritos</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content color="dark">
+  <app-alert *ngIf="!articles.length" [message]="'No hay noticias'" [attributes]="{fullPage: false}"></app-alert>
+  <app-alert *ngIf="error" [message]="'Ha ocurrido un error cargando las noticias.'"></app-alert>
+  <app-news [news]="articles" (addToFavoriteEv)="onAddToFavorite($event)"></app-news>
+</ion-content>
