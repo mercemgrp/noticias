@@ -17,11 +17,17 @@ export class FontsTabPage {
   currentFont: SourceDTO;
   articles: ArticleUi[] = [];
   articlesConfig: ArticlesConfig = {
-    hideSubtitle: true
+    hideFont: true
   }
   error = false;
-  sources: SourceDTO[];
-  menus: Menu[] = [];
+  sources: SourceDTO[] = [];
+  menus: Menu[] = [{
+    id: 'test',
+    title: '         '
+  }, {
+    id: 'test',
+    title: '         '
+  }];
   fontSelected: string;
   firstLoading: boolean;
   private ngUnsubscribe = new Subject<void>();

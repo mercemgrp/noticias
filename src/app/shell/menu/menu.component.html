@@ -13,13 +13,9 @@
     <ion-list>
       <ion-item>
         <ion-label slot="start" >Idioma</ion-label>
-        <ion-text [color]="spanishLanguage? 'primary' : 'dark'">
-          ES
-        </ion-text>
+        <ion-text [color]="spanishLanguage? 'primary' : 'dark'">ES</ion-text>
         <ion-toggle [checked]="!spanishLanguage" name="mode" color="primary" (ionChange)="onToggleLanguage()"></ion-toggle>
-        <ion-text [color]="spanishLanguage ? 'dark' : 'primary'">
-          EN
-        </ion-text>
+        <ion-text [color]="spanishLanguage ? 'dark' : 'primary'">EN</ion-text>
       </ion-item>
       <ion-item>
         <ion-label slot="start" >Modo</ion-label>

@@ -89,6 +89,7 @@ export class CategoriesTabPage {
       this.firstLoading = true;
       this.articles = [];
     }
+    
     this.newsService.getHeadlinesByCategory(categoryId, !!!e)
       .pipe(
         first(),

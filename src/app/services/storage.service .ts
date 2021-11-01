@@ -45,7 +45,7 @@ export class StorageService {
           console.log('get storage', this.favorites);
           setTimeout(() => {
             this.favoritesChangesSubject.next({article: articleSelected, action: existFavorite ? 'DELETE' : 'ADD'});
-          }, 1500);
+          }, 1000);
           return this.favorites;
         }).catch(_ => {
           return this.favorites;

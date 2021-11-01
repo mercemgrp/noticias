@@ -1,4 +1,4 @@
 export interface ArticlesConfig {
-  hideSubtitle?: boolean;
-  notSetFavorite?: boolean;
+  hideFont?: boolean;
+  hideFavoriteInfo?: boolean;
 }

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { Share } from '@capacitor/share';
 import { ActionSheetController } from '@ionic/angular';
 import { ArticlesConfig, ArticleUi } from 'src/app/models/ui';
 import { ArticleDTO } from 'src/app/models/dtos';
@@ -21,8 +21,7 @@ export class ArticleComponent implements OnInit {
 
   constructor(
     private iab: InAppBrowser,
-    private actionSheetController: ActionSheetController,
-    private socialSharing: SocialSharing) { }
+    private actionSheetController: ActionSheetController) { }
 
   ngOnInit() {
     this.articleDTO = this.article.article;
@@ -30,13 +29,26 @@ export class ArticleComponent implements OnInit {
 
 
   onAddToFavorite() {
-    if (!this.config.notSetFavorite) {
+    if (!this.config.hideFavoriteInfo) {
       this.emitFavoriteEvent();
     }
   }
 
+  onOpenUrl() {
+    this.openUrl(this.articleDTO.url);
+  }
+
   onShowMenu(e) {
     this.showMenu();
+  }
+
+  onShare() {
+    Share.share({
+      title: '¡Te comparto esta noticia!',
+      text: '',
+      url: this.articleDTO.url,
+      dialogTitle: ''
+    }).then(_ => console.log('shared'));
   }
 
   private async showMenu() {
@@ -45,18 +57,16 @@ export class ArticleComponent implements OnInit {
         cssClass: 'my-action-sheet',
         buttons: [{
           text: this.article.selected ? 'Eliminar de favoritos' : 'Añadir a favoritos',
-          icon: this.article.selected ? 'heart' : 'heapp-outline',
+          icon: this.article.selected ? 'heart' : 'heart-outline',
           handler: () => this.onAddToFavorite()
         }, {
           text: 'Ir a la noticia',
           icon: 'document-text-outline',
-          handler: () => this.openUrl(this.articleDTO.url)
+          handler: () => this.onOpenUrl()
         }, {
           text: 'Compartir',
           icon: 'share-social-outline',
-          handler: () => {
-            this.socialSharing.share('¡Mira esta noticia!' + this.articleDTO.title);
-          }
+          handler: () => this.onShare()
         },{
           text: 'Cerrar',
           icon: 'close',

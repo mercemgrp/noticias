@@ -14,7 +14,7 @@ import { ArticleDTO } from 'src/app/models/dtos';
 export class FavoritesTabPage {
   favorites: ArticleUi[];
   articlesConfig: ArticlesConfig = {
-    notSetFavorite: true
+    hideFavoriteInfo: true
   };
   error: boolean;
   firstLoading: boolean;

@@ -78,8 +78,8 @@ export class NewsService {
     const header = new HttpHeaders({
       'X-Api-Key': apiKey
     });
-    // return this.http.get(this.getMockUrl(url))
-    return this.http.get(apiUrl + url, {headers: header});
+    return this.http.get(this.getMockUrl(url))
+    // return this.http.get(apiUrl + url, {headers: header});
     
   }
 

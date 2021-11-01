@@ -1,12 +1,12 @@
 <app-header title="Favoritos"></app-header>
 
-<ion-content >
+<ion-content class="u-padding">
   <app-new-skeleton *ngIf="firstLoading"></app-new-skeleton>
   <app-alert *ngIf="error" [message]="'Ha ocurrido un error cargando las noticias.'" [attributes]=""></app-alert>
-  <ng-container *ngTemplateOutlet="!firstLoading && !error && newsTmpl"></ng-container>
+  <ng-container *ngTemplateOutlet="!firstLoading && !error && articlesTmpl"></ng-container>
 </ion-content>
 
-<ng-template #newsTmpl>
+<ng-template #articlesTmpl>
   <app-alert *ngIf="!favorites?.length" [message]="'No hay favoritos.'" [attributes]=""></app-alert>
   <app-articles [articles]="favorites" [config]="articlesConfig" (toggleFavoriteEv)="onToggleFavorite($event)"></app-articles>
 </ng-template>

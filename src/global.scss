@@ -28,12 +28,12 @@
 
 // Utilidades
 .u-flex {
-  display: fex;
+  display: flex;
   flex-direction: column;
 }
 
 .u-flex-row {
-  display: fex;
+  display: flex;
   flex-direction: row;
 }
 
@@ -45,29 +45,67 @@
   margin: 10px;
 }
 
-// Componentes
+.u-padding {
+  --padding-start: var(--ion-padding, 5px);
+  --padding-end: var(--ion-padding, 5px);
+  --padding-top: var(--ion-padding, 5px);
+  --padding-bottom: var(--ion-padding, 5px);
+  padding-left: var(--ion-padding, 5px);
+  padding-right: var(--ion-padding, 5px);
+  padding-top: var(--ion-padding, 5px);
+  padding-bottom: var(--ion-padding, 5px);
+}
+@supports (margin-inline-start: 0) or (-webkit-margin-start: 0) {
+  .u-padding {
+    padding-left: unset;
+    padding-right: unset;
+    -webkit-padding-start: var(--ion-padding, 5px);
+    padding-inline-start: var(--ion-padding, 5px);
+    -webkit-padding-end: var(--ion-padding, 5px);
+    padding-inline-end: var(--ion-padding, 5px);
+  }
+}
+
+// Ionic Components
 ion-header {
   .menu-icon {
     font-size: 28px;
   }
 }
-
-button {
-  background-color: transparent;
-  ion-icon {
-    font-weight: 600;
-    background-color: transparent;
-    border-radius: 15px;
+ion-toggle {
+  &.toggle-checked {
+    &::part(track) {
+      background: var(--ion-color-primary);
+    }
   }
 }
+
+
+
+ion-buttons {
+  &.sc-ion-buttons-md-s {
+    .button-has-icon-only.button-clear {
+      width: 20px;
+      height: 20px;
+      --padding-top: 0px;
+      --padding-end: 0px;
+      --padding-bottom: 0px;
+      --padding-start: 0px;
+      margin-right: 16px;
+      background-color: transparent;     
+    
+    ion-icon {
+      font-weight: 600;
+      background-color: transparent;
+      border-radius: 15px;
+      color: var(--ion-color-dark);
+    }
+    }
+  }
+}
+
 
 // Clases
-.custom-spinner {
-  .firstLoading-wrapper {
-    background-color: transparent;
-    box-shadow: none;
-  }
-}
 
 .my-action-sheet {
   .action-sheet-title,.action-sheet-button,.action-sheet-icon {

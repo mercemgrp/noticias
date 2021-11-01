@@ -1,14 +1,14 @@
 <app-header title="Noticias" [menus]="menus" (menuChangesEv)="onFontChanged($event)"></app-header>
 
-<ion-content >
+<ion-content class="fonts-tab-page u-padding">
   <app-new-skeleton *ngIf="firstLoading"></app-new-skeleton>
   <app-alert *ngIf="error" [message]="'Ha ocurrido un error cargando las noticias.'" [attributes]=""></app-alert>
-  <ng-container *ngTemplateOutlet="!firstLoading && !error && newsTmpl"></ng-container>
+  <ng-container *ngTemplateOutlet="!firstLoading && !error && articlesTmpl"></ng-container>
 </ion-content>
 
-<ng-template #newsTmpl>
+<ng-template #articlesTmpl>
   <app-alert *ngIf="!articles?.length" [message]="'No hay noticias.'" [attributes]=""></app-alert>
-  <h1 class="ion-padding-start">
+  <h1 *ngIf="articles?.length">
     <a (click)="openUrl(currentFont.url)">
      <ion-text color="secondary">
         {{currentFont?.name}}
