@@ -11,6 +11,9 @@
 <ng-template #skeletonTmpl>
   <div class="u-flex u-margin new-skeleton">
     <ion-label class="u-width-100">
+      <p>
+        <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
+      </p>
       <h3>
         <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
       </h3>
@@ -21,7 +24,7 @@
         <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
       </p>
     </ion-label>
-    <ion-thumbnail slot="start" class="u-width-100" style="height: 130px">
+    <ion-thumbnail slot="start" class="u-width-100">
       <ion-skeleton-text animated color="white"></ion-skeleton-text>
     </ion-thumbnail>
     <ion-label class="u-width-100">

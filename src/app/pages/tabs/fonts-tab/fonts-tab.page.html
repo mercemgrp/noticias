@@ -16,7 +16,7 @@
       <ion-icon color="secondary" slot="end" name="navigate"></ion-icon>
     </a>
   </h1>
-  <app-news [news]="articles" [config]="{showFont: false}" (toggleFavoriteEv)="onToggleFavorite($event)"></app-news>
+  <app-articles [articles]="articles" [config]="articlesConfig" (toggleFavoriteEv)="onToggleFavorite($event)"></app-articles>
   <ion-infinite-scroll threshold="25%" [disabled]="false" position="bottom" (ionInfinite)="onLoadNextHeadlines($event)">
     <ion-infinite-scroll-content firstLoadingSpinner="bubbles" firstLoadingText="Cargando más noticias...">
     </ion-infinite-scroll-content>

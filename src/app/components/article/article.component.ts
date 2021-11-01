@@ -1,21 +1,20 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { ActionSheetController } from '@ionic/angular';
-import { ArticleUi } from 'src/app/models/articleUi';
-import { ArticleDTO } from 'src/app/models/dtos/news';
+import { ArticlesConfig, ArticleUi } from 'src/app/models/ui';
+import { ArticleDTO } from 'src/app/models/dtos';
 
 
 @Component({
-  selector: 'app-new',
-  templateUrl: './new.component.html',
-  styleUrls: ['./new.component.scss'],
+  selector: 'app-article',
+  templateUrl: './article.component.html',
+  styleUrls: ['./article.component.scss'],
 })
-export class NewComponent implements OnInit {
+export class ArticleComponent implements OnInit {
 
-  @ViewChild('heartIcon') heartIcon: ElementRef;
   @Input() article: ArticleUi;
-  @Input() config;
+  @Input() config: ArticlesConfig;
   @Output() toggleFavoriteEv = new EventEmitter<ArticleUi>();
 
   articleDTO: ArticleDTO;
@@ -31,7 +30,9 @@ export class NewComponent implements OnInit {
 
 
   onAddToFavorite() {
-    this.emitFavoriteEvent();
+    if (!this.config.notSetFavorite) {
+      this.emitFavoriteEvent();
+    }
   }
 
   onShowMenu(e) {
@@ -44,7 +45,7 @@ export class NewComponent implements OnInit {
         cssClass: 'my-action-sheet',
         buttons: [{
           text: this.article.selected ? 'Eliminar de favoritos' : 'Añadir a favoritos',
-          icon: this.article.selected ? 'heart' : 'heart-outline',
+          icon: this.article.selected ? 'heart' : 'heapp-outline',
           handler: () => this.onAddToFavorite()
         }, {
           text: 'Ir a la noticia',

@@ -2,15 +2,12 @@ import { Component } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Subject } from 'rxjs';
 import { first, finalize, tap, map, takeUntil } from 'rxjs/operators';
-import { ArticleUi } from 'src/app/models/articleUi';
-import { ArticleDTO } from 'src/app/models/dtos/news';
-import { SourceDTO } from 'src/app/models/dtos/sources';
-import { Menu } from 'src/app/models/menu';
 import { AnimationsService } from 'src/app/services/animations.service';
 import { ConfigService } from 'src/app/services/config.service';
 import { NewsService } from 'src/app/services/news.service';
 import { StorageService } from 'src/app/services/storage.service ';
-
+import { SourceDTO } from 'src/app/models/dtos';
+import { ArticlesConfig, ArticleUi, Menu } from 'src/app/models/ui';
 @Component({
   selector: 'app-fonts-tab',
   templateUrl: 'fonts-tab.page.html',
@@ -19,6 +16,9 @@ import { StorageService } from 'src/app/services/storage.service ';
 export class FontsTabPage {
   currentFont: SourceDTO;
   articles: ArticleUi[] = [];
+  articlesConfig: ArticlesConfig = {
+    hideSubtitle: true
+  }
   error = false;
   sources: SourceDTO[];
   menus: Menu[] = [];

@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, first, map } from 'rxjs/operators';
-import { COUNTRIES } from '../constants/countries';
-import { LANGUAGES } from '../constants/languages';
-import { MODES } from '../constants/modes';
-import { Configuration } from '../models/config';
-import { ConfigurationDTO } from '../models/dtos/config';
+import { MODES, LANGUAGES} from '../constants';
+import { Configuration } from '../models/ui';
+import { ConfigurationDTO } from '../models/dtos';
 
 Injectable({
   providedIn: 'root'
@@ -22,9 +20,6 @@ export class ConfigService {
   }
   get configuration(): Configuration {
     return this.config;
-  }
-  get countries() {
-    return this.config.countries;
   }
   private config: Configuration;
   private languageSubject =  new BehaviorSubject<LANGUAGES>(undefined);
@@ -48,9 +43,8 @@ export class ConfigService {
 
   loadConfig() {
     return of<ConfigurationDTO>({
-      mode: MODES.LIGHT,
-      language: LANGUAGES.ES,
-      countries: [COUNTRIES.ES, COUNTRIES.USA]
+      mode: MODES.DEVICE_DEFAULT,
+      language: LANGUAGES.ES
     }).pipe(
       first(),
       catchError(() => {

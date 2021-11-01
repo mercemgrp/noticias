@@ -8,7 +8,7 @@
 
 <ng-template #newsTmpl>
   <app-alert *ngIf="!articles?.length" [message]="'No hay noticias.'" [attributes]=""></app-alert>
-  <app-news [news]="articles" (toggleFavoriteEv)="onToggleFavorite($event)"></app-news>
+  <app-articles [articles]="articles" (toggleFavoriteEv)="onToggleFavorite($event)"></app-articles>
   <ion-infinite-scroll threshold="25%" [disabled]="false" position="bottom" (ionInfinite)="onLoadNextHeadlines($event)">
     <ion-infinite-scroll-content firstLoadingSpinner="bubbles" firstLoadingText="Cargando más noticias...">
     </ion-infinite-scroll-content>

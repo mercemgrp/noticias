@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Subject } from 'rxjs';
 import { tap, first, finalize, takeUntil } from 'rxjs/operators';
-import { ArticleUi } from 'src/app/models/articleUi';
+import { ArticleUi } from 'src/app/models/ui/article-ui';
 import { AnimationsService } from 'src/app/services/animations.service';
 import { ConfigService } from 'src/app/services/config.service';
 import { NewsService } from 'src/app/services/news.service';

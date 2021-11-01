@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { ArticleUi } from 'src/app/models/articleUi';
-import { ArticleDTO } from 'src/app/models/dtos/news';
 import { AnimationsService } from 'src/app/services/animations.service';
 import { StorageService } from 'src/app/services/storage.service ';
+import { ArticlesConfig, ArticleUi} from 'src/app/models/ui';
+import { ArticleDTO } from 'src/app/models/dtos';
 
 @Component({
   selector: 'app-favorites-tab',
@@ -13,6 +13,9 @@ import { StorageService } from 'src/app/services/storage.service ';
 })
 export class FavoritesTabPage {
   favorites: ArticleUi[];
+  articlesConfig: ArticlesConfig = {
+    notSetFavorite: true
+  };
   error: boolean;
   firstLoading: boolean;
   private ngUnsubscribe = new Subject<void>();

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ArticleDTO } from '../models/dtos/news';
+import { ArticleDTO } from '../models/dtos/articles-dto';
 
 const FAVORITES_KEY = 'favorites-news';
 @Injectable({

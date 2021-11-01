@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-new-skeleton',
@@ -13,5 +13,4 @@ export class NewSkeletonComponent {
     }
     return array;
   }
-  constructor() { }
 }

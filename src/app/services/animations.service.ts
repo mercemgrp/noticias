@@ -8,7 +8,7 @@ export class AnimationsService {
 
   heartAnimation(id) {
     return createAnimation()
-    .addElement(document.querySelector('.heart-icon_' + id))
+    .addElement(document.querySelector('.heapp-icon_' + id))
     .duration(1500)
     .keyframes([
       {offset: 0, width: '10%', height: '10%', opacity: 0.2},

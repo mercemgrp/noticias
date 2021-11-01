@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, Output, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { IonSegment, MenuController } from '@ionic/angular';
-import { Menu } from 'src/app/models/menu';
+import { Menu } from 'src/app/models/ui';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',

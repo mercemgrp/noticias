@@ -8,5 +8,5 @@
 
 <ng-template #newsTmpl>
   <app-alert *ngIf="!favorites?.length" [message]="'No hay favoritos.'" [attributes]=""></app-alert>
-  <app-news [news]="favorites" (toggleFavoriteEv)="onToggleFavorite($event)"></app-news>
+  <app-articles [articles]="favorites" [config]="articlesConfig" (toggleFavoriteEv)="onToggleFavorite($event)"></app-articles>
 </ng-template>

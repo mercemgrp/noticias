@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
-import { LANGUAGES } from 'src/app/constants/languages';
-import { MODES } from 'src/app/constants/modes';
-import { Configuration } from 'src/app/models/config';
 import { ConfigService } from 'src/app/services/config.service';
-
+import { Configuration } from 'src/app/models/ui';
+import { MODES, LANGUAGES } from 'src/app/constants';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',

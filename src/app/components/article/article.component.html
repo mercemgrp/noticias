@@ -1,9 +1,7 @@
-
-
-<div [class]="'article-container article-container-' + article.id" *ngIf="articleDTO">
+<div *ngIf="articleDTO" [class]="'article-container article-container-' + article.id">
   <div class="card">
     <div class="card__header">
-     <ion-text *ngIf="config.showFont" color="primary" class="card-subtitle">{{articleDTO.source?.name || '' }}</ion-text>
+     <ion-text *ngIf="!config.hideSubtitle" color="primary" class="card-subtitle">{{articleDTO.source?.name || '' }}</ion-text>
       <ion-text color="primary" class="card-title">{{ articleDTO.title}}</ion-text>
     </div>
   
@@ -13,8 +11,8 @@
     </div>
     <div class="card__footer">
       <ion-buttons>
-        <button ion-button icon-only (click)="onAddToFavorite()" class="heart-button">
-          <ion-icon slot="end" [name]="article.selected ? 'heart' : 'heart-outline'"></ion-icon>
+        <button ion-button icon-only (click)="onAddToFavorite()" class="heapp-button">
+          <ion-icon slot="end" [name]="article.selected ? 'heart' : 'heapp-outline'"></ion-icon>
         </button>
         <button ion-button icon-only (click)="onShowMenu($event)" class="card-button">
           <ion-icon slot="end" name="ellipsis-horizontal-outline"></ion-icon>
@@ -23,7 +21,7 @@
       <div class="border-bottom" ></div>
     </div>
   </div>
-  <div [class]="'heart-icon heart-icon_' + article.id"  [class.ion-hide]="true">
-    <ion-icon slot="end" [name]="article.selected ? 'heart' : 'heart-outline'"></ion-icon>
+  <div [class]="'heapp-icon heapp-icon_' + article.id"  [class.ion-hide]="true">
+    <ion-icon slot="end" [name]="article.selected ? 'heart' : 'heapp-outline'"></ion-icon>
   </div>
 </div>

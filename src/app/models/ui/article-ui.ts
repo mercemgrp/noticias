@@ -1,4 +1,4 @@
-import { ArticleDTO } from "./dtos/news";
+import { ArticleDTO } from "../dtos/articles-dto";
 
 export interface ArticleUi {
   article: ArticleDTO;

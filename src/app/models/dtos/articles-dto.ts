@@ -1,4 +1,4 @@
-export interface NewsDTO {
+export interface ArticlesDTO {
   articles: ArticleDTO[];
   status: string;
 }
