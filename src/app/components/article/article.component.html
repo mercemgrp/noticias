@@ -9,9 +9,10 @@
       <span class="card-description" (click)="onOpenUrl()" >{{ articleDTO.description}}</span>
     </div>
     <div class="card__footer">
-      <ion-text *ngIf="!config.hideFont" color="primary" class="card-subtitle">{{articleDTO.source?.name || '' }}</ion-text>
-      <ion-buttons>
-        <ion-button *ngIf="!config.hideFavoriteInfo" (click)="onAddToFavorite()" class="star-button">
+      <ion-text *ngIf="!config.hideFont" color="medium" class="card-subtitle">{{articleDTO.source?.name || '' }}</ion-text>
+      <ion-text *ngIf="config.hideFont" color="medium" class="card-subtitle"></ion-text>
+      <ion-buttons slot="end">
+        <ion-button *ngIf="!config.hideFavoriteInfo" (click)="onToggleFavorite()" class="star-button">
           <ion-icon slot="icon-only" [name]="article.selected ? 'star' : 'star-outline'"></ion-icon>
         </ion-button>
         <ion-button  (click)="onShare()">
@@ -27,3 +28,4 @@
     <ion-icon slot="end" [name]="article.selected ? 'star' : 'star-outline'"></ion-icon>
   </div>
 </div>
+

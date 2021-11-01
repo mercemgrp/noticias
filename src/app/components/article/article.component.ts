@@ -28,7 +28,7 @@ export class ArticleComponent implements OnInit {
   }
 
 
-  onAddToFavorite() {
+  onToggleFavorite() {
     if (!this.config.hideFavoriteInfo) {
       this.emitFavoriteEvent();
     }
@@ -57,8 +57,8 @@ export class ArticleComponent implements OnInit {
         cssClass: 'my-action-sheet',
         buttons: [{
           text: this.article.selected ? 'Eliminar de favoritos' : 'Añadir a favoritos',
-          icon: this.article.selected ? 'heart' : 'heart-outline',
-          handler: () => this.onAddToFavorite()
+          icon: this.article.selected ? 'star' : 'star-outline',
+          handler: () => this.emitFavoriteEvent()
         }, {
           text: 'Ir a la noticia',
           icon: 'document-text-outline',

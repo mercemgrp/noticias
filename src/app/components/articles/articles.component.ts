@@ -12,7 +12,7 @@ export class ArticlesComponent {
   @Output() toggleFavoriteEv = new EventEmitter();
   constructor() { }
 
-  onAddToFavorite(ev) {
+  onToggleFavorite(ev) {
     this.toggleFavoriteEv.emit(ev);
   }
 

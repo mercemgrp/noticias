@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Subject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
 import { AnimationsService } from 'src/app/services/animations.service';
 import { StorageService } from 'src/app/services/storage.service ';
 import { ArticlesConfig, ArticleUi} from 'src/app/models/ui';
@@ -28,7 +28,9 @@ export class FavoritesTabPage {
   ngOnInit() {
     this.setFavorites();
     this.storageService.favoritesChanges$
-      .pipe(tap(favAction => this.updateFavorites(favAction)))  
+      .pipe(
+        tap(favAction => this.updateFavorites(favAction)),
+        takeUntil(this.ngUnsubscribe))  
       .subscribe();
 
   }
@@ -40,19 +42,14 @@ export class FavoritesTabPage {
 
   onToggleFavorite(event: ArticleUi) {
     this.storageService.toggleFavorite(event.article)
-      .then(_ => {
-        this.animationService.deleteCartAnimation(event.id).play().then(
-          resp => this.favorites = this.favorites.filter(fav => fav.id !== event.id)
-        );
-      })
-      .catch(() => console.log('Mostrar error'))
-      .finally(() => this.firstLoading = false);
+      .then(_ => this.animationService.deleteCartAnimation(event.id).play())
+      .catch(() => console.log('Mostrar error'));
   }
 
   private setFavorites() {
     this.favorites =  this.storageService.favoritesHeadlines.map((currentNew, i) => {
       return {
-        id: 'favorites_' + i,
+        id: 'favorites-' + this.getRandomStr(),
         selected: true,
         article: currentNew
       }
@@ -60,6 +57,9 @@ export class FavoritesTabPage {
   }
     
   private updateFavorites(favAction: {article: ArticleDTO, action: string}) {
+    if (!this.favorites) {
+      return;
+    }
     switch(favAction?.action) {
       case 'DELETE':
         const favoriteIndex = this.favorites.findIndex(fav => fav.article.title === favAction.article.title);
@@ -72,13 +72,17 @@ export class FavoritesTabPage {
           this.favorites.unshift({
             article: favAction.article,
             selected: true,
-            id: 'favorites_' + this.favorites.length
+            id: 'favorites-' + this.getRandomStr()
           })
         }
         break;
       default:
         break;
     }
-  }  
+  } 
+
+  private getRandomStr() {
+    return (Math.random() + 1).toString(36).substring(2);
+  }
 
 }

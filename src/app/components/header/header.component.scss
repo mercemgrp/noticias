@@ -1,15 +1,8 @@
 
 .my-header {
-  @media (min-width: 992px) {
-    display: flex;
-    justify-content: center;
-  }
   ion-toolbar {
     @media (min-width: 992px) {
-      width: var(--ion-grid-width-lg, var(--ion-grid-width, 960px));
-    }
-    @media (min-width: 1200px) {
-      width: var(--ion-grid-width-xl, var(--ion-grid-width, 1140px));
+      text-align: center;
     }
     ion-title {
       @media (min-width: 992px) {

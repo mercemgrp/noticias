@@ -1,5 +1,14 @@
 .fonts-tab-page {
+  
   h1 {
-    margin: 5px 10px;
+    @media (min-width: 992px) {
+      text-align: center;
+    }
+    position: fixed;
+    margin: -5px;
+    padding: 10px;
+    background-color: var(--ion-color-light);
+    z-index: 100;
+    width: 100%;
   }
 }

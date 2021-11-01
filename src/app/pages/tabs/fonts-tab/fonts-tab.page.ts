@@ -15,7 +15,7 @@ import { ArticlesConfig, ArticleUi, Menu } from 'src/app/models/ui';
 })
 export class FontsTabPage {
   currentFont: SourceDTO;
-  articles: ArticleUi[] = [];
+  articles: ArticleUi[];
   articlesConfig: ArticlesConfig = {
     hideFont: true
   }
@@ -43,18 +43,27 @@ export class FontsTabPage {
     this.firstLoading = true;
     this.configService.languageChanges$
       .pipe(
-        tap(_ => this.getSources()),
+        tap(_ => {
+            this.getSources();
+        }),
         takeUntil(this.ngUnsubscribe)
       )  
       .subscribe();
     this.storageService.favoritesChanges$
-      .pipe(tap(_ => this.updateFavorites()))  
+      .pipe(
+        tap(_ => this.updateFavorites()),
+        takeUntil(this.ngUnsubscribe))  
       .subscribe();
   }
 
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  ionViewWillEnter() {
+    this.getHeadlinesByDomain(this.fontSelected);
+    
   }
 
   onFontChanged(fontId) {
@@ -70,7 +79,7 @@ export class FontsTabPage {
     this.storageService.toggleFavorite(article.article)
       .then(_ => {
         article.selected = !article.selected;
-        this.animationsService.heartAnimation(article.id).play();
+        this.animationsService.starAnimation(article.id).play();
       })
       .catch(_ => console.log('Mostrar error'))
   }
@@ -97,7 +106,9 @@ export class FontsTabPage {
         });
         this.fontSelected = this.menus[0]?.id;
         this.setCurrentFont();
-        this.getHeadlinesByDomain(this.fontSelected);
+        if (this.articles) {
+          this.getHeadlinesByDomain(this.fontSelected);
+        }
       })).subscribe();
   }
 
@@ -138,7 +149,7 @@ export class FontsTabPage {
   }
 
   private updateFavorites() {
-    this.articles.forEach(article => {
+    this.articles?.forEach(article => {
       article.selected = this.storageService.favoritesHeadlines.some(favNew => article.article.title === favNew.title)
     });
   }

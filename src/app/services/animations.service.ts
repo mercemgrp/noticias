@@ -6,7 +6,7 @@ import { createAnimation } from '@ionic/angular';
 })
 export class AnimationsService {
 
-  heartAnimation(id) {
+  starAnimation(id) {
     return createAnimation()
     .addElement(document.querySelector('.star-icon_' + id))
     .duration(1000)
@@ -23,7 +23,8 @@ export class AnimationsService {
     return createAnimation()
     .addElement(document.querySelector('.article-container-' + id))
     .duration(1000)
-    .fromTo('transform', 'translateX(0%)', 'translateX(100%)');
+    .fromTo('transform', 'translate(0%)', 'translate(50%)')
+    .afterAddClass('ion-hide');
   } 
 
 }

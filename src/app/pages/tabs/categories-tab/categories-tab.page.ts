@@ -13,7 +13,7 @@ import { Menu, ArticleUi } from 'src/app/models/ui';
   styleUrls: ['categories-tab.page.scss']
 })
 export class CategoriesTabPage {
-  articles: ArticleUi[] = [];
+  articles: ArticleUi[];
   error = false;
   categories: Menu[] = [{
     id: 'business',
@@ -52,18 +52,29 @@ export class CategoriesTabPage {
     this.categorySelected = this.categories[0].id;
     this.configService.languageChanges$
       .pipe(
-        tap(_ => this.getHeadlinesByCategory(this.categorySelected)),
+        tap(_ => {
+          if(this.articles) {
+            this.getHeadlinesByCategory(this.categorySelected);
+          }
+        }),
         takeUntil(this.ngUnsubscribe)
       )  
       .subscribe();
     this.storageService.favoritesChanges$
-      .pipe(tap(_ => this.updateFavorites()))  
+      .pipe(
+        tap(_ => this.updateFavorites()),
+        takeUntil(this.ngUnsubscribe))  
       .subscribe();
   }
 
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  ionViewWillEnter() {
+    this.getHeadlinesByCategory(this.categorySelected);
+    
   }
 
   onCategoryChanged(categoryId) {
@@ -75,7 +86,7 @@ export class CategoriesTabPage {
     this.storageService.toggleFavorite(article.article)
       .then(_ => {
         article.selected = !article.selected;
-        this.animationsService.heartAnimation(article.id).play();
+        this.animationsService.starAnimation(article.id).play();
       })
       .catch(_ => console.log('Mostrar error'))
   }
@@ -118,7 +129,7 @@ export class CategoriesTabPage {
   }
 
   private updateFavorites() {
-    this.articles.forEach(article => {
+    this.articles?.forEach(article => {
       article.selected = this.storageService.favoritesHeadlines.some(favNew => article.article.title === favNew.title)
     });
   }

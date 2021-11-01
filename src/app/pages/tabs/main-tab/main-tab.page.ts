@@ -13,7 +13,7 @@ import { StorageService } from 'src/app/services/storage.service ';
   styleUrls: ['main-tab.page.scss']
 })
 export class MainTabPage {
-  articles: ArticleUi[] = [];
+  articles: ArticleUi[];
   error = false;
   firstLoading = false;
   private ngUnsubscribe = new Subject<void>();
@@ -24,15 +24,20 @@ export class MainTabPage {
     private animationsService: AnimationsService) {
   }
 
-
   ngOnInit() {
     this.configService.languageChanges$
       .pipe(
-        tap(_ => this.getTopHeadlines()),
+        tap(_ => {
+          if(this.articles) {
+            this.getTopHeadlines();
+          }
+        }),
         takeUntil(this.ngUnsubscribe))  
       .subscribe();
    this.storageService.favoritesChanges$
-      .pipe(tap(_ => this.updateFavorites()))  
+      .pipe(
+        tap(_ => this.updateFavorites()),
+        takeUntil(this.ngUnsubscribe))  
       .subscribe();
   }
 
@@ -41,11 +46,16 @@ export class MainTabPage {
     this.ngUnsubscribe.complete();
   }
 
+  ionViewWillEnter() {
+    this.getTopHeadlines();
+    
+  }
+
   onToggleFavorite(article: ArticleUi) {
     this.storageService.toggleFavorite(article.article)
       .then(_ => {
         article.selected = !article.selected;
-        this.animationsService.heartAnimation(article.id).play();
+        this.animationsService.starAnimation(article.id).play();
       })
       .catch(_ => console.log('Mostrar error'));
   }
@@ -83,7 +93,7 @@ export class MainTabPage {
   }
 
   private updateFavorites() {
-    this.articles.forEach(article => {
+    this.articles?.forEach(article => {
      article.selected = this.storageService.favoritesHeadlines.some(favNew => article.article.title === favNew.title)
     });
   }
