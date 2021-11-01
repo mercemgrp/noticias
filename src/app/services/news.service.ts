@@ -1,10 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { createAnimation } from '@ionic/angular';
+import {  Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Article, ArticleSelected, NewsDTO } from '../models/news';
+import { NewsDTO, ArticleDTO } from '../models/dtos/news';
+import { SourceDTO, SourcesDTO } from '../models/dtos/sources';
+import { ConfigService } from './config.service';
 import { EnvironmentService } from './environment.service';
-
 
 @Injectable({
   providedIn: 'root'
@@ -12,84 +14,85 @@ import { EnvironmentService } from './environment.service';
 export class NewsService {
   private topHeadlinesPage = 0;
   private headlinesByCategoryPage = 0;
-  private articles: Article[] = [];
-  private articlesSubject = new BehaviorSubject<Article[]>([]);
-  articles$: Observable<Article[]>;
+  private headlinesByDomainPage = 0;
+  private sources: SourceDTO[];
+  
   constructor(
     private http: HttpClient,
-    private environmentService: EnvironmentService) {
-      this.articles$ = this.articlesSubject.asObservable();
+    private environmentService: EnvironmentService,
+    private configService: ConfigService) {
     }
 
-  getTopHeadlines(): Observable<Article[]> {
-    this.topHeadlinesPage++;
-    return this.exec<NewsDTO>(`top-headlines?language=es&page=${this.topHeadlinesPage}`)
+  getSources(): Observable<SourceDTO[]> {
+    return this.get<SourcesDTO>(`top-headlines/sources?language=${this.configService.language}`)
+    .pipe(catchError(() => {
+      return of({
+        sources: [],
+        status: 'error'
+      });
+    } ))
+    .pipe(map((resp: SourcesDTO) => {
+      this.sources = resp.sources;
+      return this.sources;
+    }))
+  }
+
+  getTopHeadlines(reset=true): Observable<ArticleDTO[]> {
+    reset ? this.topHeadlinesPage= 1 : this.topHeadlinesPage++;
+    return this.get<NewsDTO>(`top-headlines?language=${this.configService.language}&page=${this.topHeadlinesPage}`)
       .pipe(catchError(() => {
         return of({articles: []} as NewsDTO);
       } ))
-      .pipe(map((resp: NewsDTO) => {
-        if (resp.status !== 'ok') {
-          return [];
-        } else {
-          this.articles = resp?.articles.map(article => {
-            return {
-              ...article,
-              id: Math.random(),
-              selected: false
-            } as Article;
-          });
-          this.articlesSubject.next(this.articles);
-          return this.articles;
-        }
-      }));
+      .pipe(map((resp: NewsDTO) => this.manageResponse(resp)));
   }
 
-  getHeadlinesByCategory(category: string, reset=true): Observable<Article[]> {
+  getHeadlinesByCategory(category: string, reset=true): Observable<ArticleDTO[]> {
     reset ? this.headlinesByCategoryPage=1 : this.headlinesByCategoryPage++;
-    return this.exec<Article[]>(`top-headlines?language=es&category=${category}&page=${this.headlinesByCategoryPage}`)
+    return this.get<ArticleDTO[]>(`top-headlines?language=${this.configService.language}&category=${category}&page=${this.headlinesByCategoryPage}`)
     .pipe(catchError(() => {
       return of({articles: []} as NewsDTO);
     } ))
-      .pipe(map((resp: NewsDTO) => {
-        if (resp.status !== 'ok') {
-          return [];
-        } else {
-          this.articles = resp?.articles.map(article => {
-            return {
-              ...article,
-              id: Math.random(),
-              selected: false
-            } as Article;
-          });
-          this.articlesSubject.next(this.articles);
-          return this.articles;
-        }
-      }));
+      .pipe(map((resp: NewsDTO) => this.manageResponse(resp)));
   }
 
-  getFavoritesHeadlines(): Article[] {
-    return this.articles.filter(article => article.selected);
+  getHeadlinesByDomain(domain: string, reset=true): Observable<ArticleDTO[]> {
+    reset ? this.headlinesByDomainPage=1 : this.headlinesByDomainPage++;
+    return this.get<ArticleDTO[]>(`top-headlines?language=${this.configService.language}&sources=${domain}&page=${this.headlinesByDomainPage}`)
+    .pipe(catchError(() => {
+      return of({articles: []} as NewsDTO);
+    } ))
+      .pipe(map((resp: NewsDTO) => this.manageResponse(resp)));
   }
 
-  addToFavorite(articleSelected: ArticleSelected) {
-    try {
-      const article = this.articles.find(article => article.id === articleSelected.id);
-      article.selected = !articleSelected.isSelected;
-      this.articlesSubject.next(this.articles);
-      return [...this.articles];
-    } catch(e) {
-      throw('Error');
+  private manageResponse(resp: NewsDTO): ArticleDTO[] {
+    if (resp.status !== 'ok') {
+      return [];
+    } else {
+      return resp.articles || [];
     }
   }
 
   
-  private exec<T>(url: string) {
+  private get<T>(url: string) {
     const apiKey = this.environmentService.apiKey;
     const apiUrl = this.environmentService.apiUrl;
     const header = new HttpHeaders({
       'X-Api-Key': apiKey
     });
+    // return this.http.get(this.getMockUrl(url))
     return this.http.get(apiUrl + url, {headers: header});
     
+  }
+
+  private getMockUrl(url: string) {
+    const params = url.split('?')[1];
+    let base = 'assets/mocks/' + url.split('?')[0];
+    if(params?.includes('category')) {
+      base = base +'-category';
+    }
+    if(params?.includes('sources')) {
+      base = base +'-sources';
+    }
+    return base + '.json';
   }
 }

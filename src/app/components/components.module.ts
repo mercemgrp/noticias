@@ -4,6 +4,9 @@ import { NewsComponent } from './news/news.component';
 import { NewComponent } from './new/new.component';
 import { IonicModule } from '@ionic/angular';
 import { AlertComponent } from './alert/alert.component';
+import { NewSkeletonComponent } from './new-skeleton/new-skeleton.component';
+import { HeaderComponent } from './header/header.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -11,15 +14,20 @@ import { AlertComponent } from './alert/alert.component';
   declarations: [
     NewComponent,
     NewsComponent,
-    AlertComponent
+    AlertComponent,
+    NewSkeletonComponent,
+    HeaderComponent
   ],
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    FormsModule
   ],
   exports: [
     NewsComponent,
-    AlertComponent
+    AlertComponent,
+    NewSkeletonComponent,
+    HeaderComponent
   ]
 })
 export class ComponentsModule { }

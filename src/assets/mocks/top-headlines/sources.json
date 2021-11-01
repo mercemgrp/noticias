@@ -1,0 +1,60 @@
+{
+  "status": "ok",
+  "sources": [{
+    "id": "cnn-es",
+    "name": "CNN Spanish",
+    "description": "Lee las últimas noticias e información sobre Latinoamérica, Estados Unidos, mundo, entretenimiento, política, salud, tecnología y deportes en CNNEspañol.com.",
+    "url": "http://cnnespanol.cnn.com/",
+    "category": "general",
+    "language": "es",
+    "country": "us"
+  }, {
+    "id": "el-mundo",
+    "name": "El Mundo",
+    "description": "Noticias, actualidad, álbumes, debates, sociedad, servicios, entretenimiento y última hora en España y el mundo.",
+    "url": "http://www.elmundo.es",
+    "category": "general",
+    "language": "es",
+    "country": "es"
+  }, {
+    "id": "google-news-ar",
+    "name": "Google News (Argentina)",
+    "description": "Completa cobertura actualizada de noticias agregadas a partir de fuentes de todo el mundo por Google Noticias.",
+    "url": "https://news.google.com",
+    "category": "general",
+    "language": "es",
+    "country": "ar"
+  }, {
+    "id": "infobae",
+    "name": "Infobae",
+    "description": "Noticias de Argentina y del mundo en tiempo real. Información, videos y fotos sobre los hechos más relevantes y sus protagonistas. Léelo antes en infobae.",
+    "url": "http://www.infobae.com/?noredirect",
+    "category": "general",
+    "language": "es",
+    "country": "ar"
+  }, {
+    "id": "la-gaceta",
+    "name": "La Gaceta",
+    "description": "El diario de Tucumán, noticias 24 horas online - San Miguel de Tucumán - Argentina - Ultimo momento - Ultimas noticias.",
+    "url": "http://www.lagaceta.com.ar",
+    "category": "general",
+    "language": "es",
+    "country": "ar"
+  }, {
+    "id": "la-nacion",
+    "name": "La Nacion",
+    "description": "Información confiable en Internet. Noticias de Argentina y del mundo - ¡Informate ya!",
+    "url": "http://www.lanacion.com.ar",
+    "category": "general",
+    "language": "es",
+    "country": "ar"
+  }, {
+    "id": "marca",
+    "name": "Marca",
+    "description": "La mejor información deportiva en castellano actualizada minuto a minuto en noticias, vídeos, fotos, retransmisiones y resultados en directo.",
+    "url": "http://www.marca.com",
+    "category": "sports",
+    "language": "es",
+    "country": "es"
+  }]
+}

@@ -1,25 +1,29 @@
-<ion-card class="card" color="dark" *ngIf="article">
-  <ion-card-header class="card__header">
-    <ion-img *ngIf="article.urlToImage" class="card-img" [src]="article.urlToImage"></ion-img>
-    <ion-card-subtitle>
-      <span *ngIf="article.source?.name" class="card-subtitle">{{article.source.name }} </span></ion-card-subtitle>
-    <ion-card-title> <span class="card-title">{{ article.title}}</span></ion-card-title>
-  </ion-card-header>
 
-  <ion-card-content class="card__body">
-    <ion-text>
-      {{ article.description}}
-    </ion-text>
-  </ion-card-content>
-  <div class="card__footer">
-    <ion-buttons>
-      <button ion-button icon-only (click)="onOpenLink(article.url)" class="add-button">
-        <ion-icon slot="end" name="add"></ion-icon>
-      </button>
-      <button ion-button icon-only (click)="onAddToFavorite()" class="heart-button">
-        <ion-icon slot="end" [name]="article.selected ? 'heart' : 'heart-outline'"></ion-icon>
-      </button>
-    </ion-buttons>
-    <div class="card__footer-border"></div>
+
+<div [class]="'article-container article-container-' + article.id" *ngIf="articleDTO">
+  <div class="card">
+    <div class="card__header">
+     <ion-text *ngIf="config.showFont" color="primary" class="card-subtitle">{{articleDTO.source?.name || '' }}</ion-text>
+      <ion-text color="primary" class="card-title">{{ articleDTO.title}}</ion-text>
+    </div>
+  
+    <div class="card__body">
+      <ion-img *ngIf="articleDTO.urlToImage" class="card-img" [src]="articleDTO.urlToImage" (click)="onAddToFavorite()"></ion-img>
+      <span class="card-description" >{{ articleDTO.description}}</span>
+    </div>
+    <div class="card__footer">
+      <ion-buttons>
+        <button ion-button icon-only (click)="onAddToFavorite()" class="heart-button">
+          <ion-icon slot="end" [name]="article.selected ? 'heart' : 'heart-outline'"></ion-icon>
+        </button>
+        <button ion-button icon-only (click)="onShowMenu($event)" class="card-button">
+          <ion-icon slot="end" name="ellipsis-horizontal-outline"></ion-icon>
+        </button>
+      </ion-buttons>
+      <div class="border-bottom" ></div>
+    </div>
   </div>
-</ion-card>
+  <div [class]="'heart-icon heart-icon_' + article.id"  [class.ion-hide]="true">
+    <ion-icon slot="end" [name]="article.selected ? 'heart' : 'heart-outline'"></ion-icon>
+  </div>
+</div>

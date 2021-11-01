@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Article } from 'src/app/models/news';
+import { ArticleUi } from 'src/app/models/articleUi';
 
 @Component({
   selector: 'app-news',
@@ -7,14 +7,17 @@ import { Article } from 'src/app/models/news';
   styleUrls: ['./news.component.scss'],
 })
 export class NewsComponent implements OnInit {
-  @Input() news: Article[];
-  @Output() addToFavoriteEv = new EventEmitter();
+  @Input() news: ArticleUi[];
+  @Input() config = {
+    showFont: true
+  };
+  @Output() toggleFavoriteEv = new EventEmitter();
   constructor() { }
 
   ngOnInit() {}
 
   onAddToFavorite(ev) {
-    this.addToFavoriteEv.emit(ev);
+    this.toggleFavoriteEv.emit(ev);
   }
 
 }

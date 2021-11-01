@@ -26,15 +26,51 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 
-
-.color-blue {
-  color: #42b9f1;
+// Utilidades
+.u-flex {
+  display: fex;
+  flex-direction: column;
 }
 
+.u-flex-row {
+  display: fex;
+  flex-direction: row;
+}
+
+.u-width-100 {
+  width: 100%;
+}
+
+.u-margin {
+  margin: 10px;
+}
+
+// Componentes
+ion-header {
+  .menu-icon {
+    font-size: 28px;
+  }
+}
+
+button {
+  background-color: transparent;
+  ion-icon {
+    font-weight: 600;
+    background-color: transparent;
+    border-radius: 15px;
+  }
+}
+
+// Clases
 .custom-spinner {
-  .loading-wrapper {
+  .firstLoading-wrapper {
     background-color: transparent;
     box-shadow: none;
   }
-  
+}
+
+.my-action-sheet {
+  .action-sheet-title,.action-sheet-button,.action-sheet-icon {
+    color: var(--ion-color-dark);
+  }
 }

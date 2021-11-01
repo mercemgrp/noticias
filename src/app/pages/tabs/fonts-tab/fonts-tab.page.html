@@ -1,0 +1,24 @@
+<app-header title="Noticias" [menus]="menus" (menuChangesEv)="onFontChanged($event)"></app-header>
+
+<ion-content >
+  <app-new-skeleton *ngIf="firstLoading"></app-new-skeleton>
+  <app-alert *ngIf="error" [message]="'Ha ocurrido un error cargando las noticias.'" [attributes]=""></app-alert>
+  <ng-container *ngTemplateOutlet="!firstLoading && !error && newsTmpl"></ng-container>
+</ion-content>
+
+<ng-template #newsTmpl>
+  <app-alert *ngIf="!articles?.length" [message]="'No hay noticias.'" [attributes]=""></app-alert>
+  <h1 class="ion-padding-start">
+    <a (click)="openUrl(currentFont.url)">
+     <ion-text color="secondary">
+        {{currentFont?.name}}
+      </ion-text>
+      <ion-icon color="secondary" slot="end" name="navigate"></ion-icon>
+    </a>
+  </h1>
+  <app-news [news]="articles" [config]="{showFont: false}" (toggleFavoriteEv)="onToggleFavorite($event)"></app-news>
+  <ion-infinite-scroll threshold="25%" [disabled]="false" position="bottom" (ionInfinite)="onLoadNextHeadlines($event)">
+    <ion-infinite-scroll-content firstLoadingSpinner="bubbles" firstLoadingText="Cargando más noticias...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ng-template>

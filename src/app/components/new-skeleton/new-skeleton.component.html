@@ -1,0 +1,39 @@
+<ion-grid fixed>
+  <ion-row>
+    <ion-col size-lg="4" size-md="6" size-sm="6" size-xs="12" *ngFor="let row of numberOfRowsArray">
+      <ion-content *ngTemplateOutlet="skeletonTmpl">
+      </ion-content>
+    </ion-col>
+  </ion-row>
+  </ion-grid>
+
+
+<ng-template #skeletonTmpl>
+  <div class="u-flex u-margin new-skeleton">
+    <ion-label class="u-width-100">
+      <h3>
+        <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+      </h3>
+      <p>
+        <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+      </p>
+      <p>
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+      </p>
+    </ion-label>
+    <ion-thumbnail slot="start" class="u-width-100" style="height: 130px">
+      <ion-skeleton-text animated color="white"></ion-skeleton-text>
+    </ion-thumbnail>
+    <ion-label class="u-width-100">
+      <h3>
+        <ion-skeleton-text animated class="u-width-100"></ion-skeleton-text>
+      </h3>
+      <p>
+        <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+      </p>
+      <p>
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+      </p>
+    </ion-label>
+  </div>
+</ng-template>

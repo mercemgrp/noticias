@@ -1,0 +1,15 @@
+<ion-header class="my-header" [translucent]="true">
+  <ion-toolbar > 
+    <ion-title color="primary">{{title}}</ion-title>
+    <ion-buttons  slot="end">
+      <ion-button (click)="onOpenMainMenu()">
+        <ion-icon slot="icon-only" name="menu" class="menu-icon"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-segment *ngIf="menus" scrollable mode="md"  class="menus" [value]="" (ionChange)="onMenuChanges($event)">
+    <ion-segment-button [value]="menu.id" *ngFor="let menu of menus;let i = index">
+      <ion-label [class.menus__text]="true">{{menu.title}}</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
