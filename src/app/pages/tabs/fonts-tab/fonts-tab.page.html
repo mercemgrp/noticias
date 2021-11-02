@@ -1,6 +1,7 @@
-<app-header [title]="'SECTIONS.FONTS' | translate" [menus]="menus" [hide]="scrollingDown" (menuChangesEv)="onFontChanged($event)"></app-header>
-<ion-content class="fonts-tab-page u-padding" [scrollEvents]="true" (ionScroll)="onScroll($event)">
+<app-header [title]="'SECTIONS.FONTS' | translate" [menus]="menus" [hide]="scrollingDown"
+  (menuChangesEv)="onFontChanged($event)"></app-header>
 
+<ion-content class="fonts-tab-page u-padding" [scrollEvents]="true" (ionScroll)="onScroll($event)">
   <app-new-skeleton *ngIf="firstLoading"></app-new-skeleton>
   <app-alert *ngIf="error" [message]="'MESSAGES.ERROR_LOADING' | translate" [attributes]=""></app-alert>
   <ng-container *ngTemplateOutlet="!firstLoading && !error && articlesTmpl"></ng-container>
@@ -14,13 +15,14 @@
   <app-alert *ngIf="articles?.length === 0" [message]="'MESSAGES.NO_ARTICLES' | translate" [attributes]=""></app-alert>
   <h1 *ngIf="articles?.length">
     <a (click)="openUrl(currentFont.url)">
-     <ion-text color="secondary">
+      <ion-text color="secondary">
         {{currentFont?.name}}
       </ion-text>
     </a>
   </h1>
   <div class="articles-container">
-    <app-articles [articles]="articles" [config]="articlesConfig" (toggleFavoriteEv)="onToggleFavorite($event)"></app-articles>
+    <app-articles [articles]="articles" [config]="articlesConfig" (toggleFavoriteEv)="onToggleFavorite($event)">
+    </app-articles>
   </div>
-  
+
 </ng-template>

@@ -74,13 +74,7 @@ export class FontsTabPage {
   }
 
   onScroll(e) : void {
-    console.log('onScroll font', e);
-    const downDirection = this.scrollPosition < e.detail.scrollTop;
-    if (downDirection && !this.scrollingDown) {
-      this.scrollingDown = true;
-    } else if(!downDirection && this.scrollingDown) {
-      this.scrollingDown = false;
-    }
+    this.scrollingDown = this.scrollPosition < e.detail.scrollTop;
     this.scrollPosition = e.detail.scrollTop;
   }
 

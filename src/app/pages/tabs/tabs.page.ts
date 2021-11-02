@@ -48,10 +48,8 @@ export class TabsPage {
   }
 
   onScroll(e) : void {
-    console.log(e.detail.scrollTop);
     this.scrollingDown = this.scrollPosition < e.detail.scrollTop;
     this.scrollPosition = e.detail.scrollTop;
-    console.log('scrollingDown', this.scrollingDown);
   }
 
   onSelectTab(e) {

@@ -81,7 +81,6 @@ export class CategoriesTabPage {
   onScroll(e) : void {
     this.scrollingDown = this.scrollPosition < e.detail.scrollTop;
     this.scrollPosition = e.detail.scrollTop;
-    console.log('onScroll cat', e);
   }
 
 
