@@ -11,7 +11,7 @@
 </ion-content>
 
 <ng-template #articlesTmpl>
-  <app-alert *ngIf="!articles?.length" [message]="'MESSAGES.NO_ARTICLES' | translate" [attributes]=""></app-alert>
+  <app-alert *ngIf="articles?.length === 0" [message]="'MESSAGES.NO_ARTICLES' | translate" [attributes]=""></app-alert>
   <h1 *ngIf="articles?.length">
     <a (click)="openUrl(currentFont.url)">
      <ion-text color="secondary">
