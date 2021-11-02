@@ -1,12 +1,13 @@
 
-import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { tap, first, finalize, takeUntil } from 'rxjs/operators';
-import { ArticleUi } from 'src/app/models/ui/article-ui';
-import { AnimationsService } from 'src/app/services/animations.service';
-import { ConfigService } from 'src/app/services/config.service';
-import { NewsService } from 'src/app/services/news.service';
-import { StorageService } from 'src/app/services/storage.service ';
+import { ArticleUi } from 'src/app/shared/models/ui';
+import { AnimationsService } from 'src/app/shared/services/animations.service';
+import { ConfigService } from 'src/app/shared/services/config.service';
+import { NewsService } from 'src/app/shared/services/news.service';
+import { StorageService } from 'src/app/shared/services/storage.service ';
+
 @Component({
   selector: 'app-main-tab',
   templateUrl: 'main-tab.page.html',

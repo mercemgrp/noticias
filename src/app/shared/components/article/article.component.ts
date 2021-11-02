@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Share } from '@capacitor/share';
 import { ActionSheetController } from '@ionic/angular';
-import { ArticlesConfig, ArticleUi } from 'src/app/models/ui';
-import { ArticleDTO } from 'src/app/models/dtos';
+import { ArticleDTO } from '../../models/dtos';
+import { ArticleUi, ArticlesConfig } from '../../models/ui';
 
 
 @Component({

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { TabMenu } from 'src/app/models/ui/tabs';
+import { TabMenu } from 'src/app/shared/models/ui/tabs';
 
 @Component({
   selector: 'app-tabs',

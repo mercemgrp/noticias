@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { Subject } from 'rxjs';
 import { first, finalize, tap, takeUntil } from 'rxjs/operators';
-import { AnimationsService } from 'src/app/services/animations.service';
-import { ConfigService } from 'src/app/services/config.service';
-import { NewsService } from 'src/app/services/news.service';
-import { StorageService } from 'src/app/services/storage.service ';
-import { Menu, ArticleUi } from 'src/app/models/ui';
+import { ArticleUi, Menu } from 'src/app/shared/models/ui';
+import { AnimationsService } from 'src/app/shared/services/animations.service';
+import { ConfigService } from 'src/app/shared/services/config.service';
+import { NewsService } from 'src/app/shared/services/news.service';
+import { StorageService } from 'src/app/shared/services/storage.service ';
 
 @Component({
   selector: 'app-categories-tab',

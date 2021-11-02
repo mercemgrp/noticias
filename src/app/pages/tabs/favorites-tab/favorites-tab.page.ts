@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
-import { AnimationsService } from 'src/app/services/animations.service';
-import { StorageService } from 'src/app/services/storage.service ';
-import { ArticlesConfig, ArticleUi} from 'src/app/models/ui';
-import { ArticleDTO } from 'src/app/models/dtos';
+import { ArticleDTO } from 'src/app/shared/models/dtos';
+import { ArticleUi, ArticlesConfig } from 'src/app/shared/models/ui';
+import { AnimationsService } from 'src/app/shared/services/animations.service';
+import { StorageService } from 'src/app/shared/services/storage.service ';
 
 @Component({
   selector: 'app-favorites-tab',

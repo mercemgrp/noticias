@@ -25,7 +25,7 @@ export class AnimationsService {
     .duration(1000)
     //.fromTo('transform', 'translate(0%)', 'translate(50%)')
     .fromTo('opacity', '1', '0')
-    .afterAddClass('ion-hide');
-  } 
+  //  .afterAddClass('ion-hide');
+  }
 
 }

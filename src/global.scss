@@ -112,3 +112,23 @@ ion-buttons {
     color: var(--ion-color-dark);
   }
 }
+
+.transition-margin-top {
+  transition: margin-top 700ms;
+}
+
+.top44 {
+  top: -44px;
+}
+
+.marginTop44 {
+  margin-top: -44px;
+}
+
+.top360 {
+  top: -360px;
+}
+
+.marginTop360 {
+  margin-top: -360px;
+}

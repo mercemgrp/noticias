@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ArticleUi, ArticlesConfig } from 'src/app/models/ui';
+import { ArticleUi, ArticlesConfig } from '../../models/ui';
 
 @Component({
   selector: 'app-articles',

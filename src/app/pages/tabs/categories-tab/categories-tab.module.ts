@@ -3,10 +3,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CategoriesTabPage } from './categories-tab.page';
-
-import { ComponentsModule } from 'src/app/components/components.module';
 import { CategoriesTabPageRoutingModule } from './categories-tab-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -15,7 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
     FormsModule,
     TranslateModule,
     CategoriesTabPageRoutingModule,
-    ComponentsModule
+    SharedModule
   ],
   declarations: [CategoriesTabPage]
 })

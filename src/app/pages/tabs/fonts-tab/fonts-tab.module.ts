@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FontsTabPage } from './fonts-tab.page';
-import { ComponentsModule } from 'src/app/components/components.module';
 import { FontsTabPageRoutingModule } from './fonts-tab-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -14,8 +14,9 @@ import { TranslateModule } from '@ngx-translate/core';
     FormsModule,
     TranslateModule,
     FontsTabPageRoutingModule,
-    ComponentsModule
+    SharedModule
   ],
+  providers: [],
   declarations: [FontsTabPage]
 })
 export class FontsTabPageModule {}

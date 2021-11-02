@@ -1,13 +1,13 @@
 import { Platform } from "@ionic/angular";
 import { Component } from "@angular/core";
 import { SplashScreen } from "@capacitor/splash-screen";
-import { ConfigService } from "./services/config.service";
 import { map, takeUntil, tap } from "rxjs/operators";
 import { TranslateService } from "@ngx-translate/core";
 import { Subject } from "rxjs";
-import { LANGUAGES } from "./constants";
 import { StatusBar } from "@capacitor/status-bar";
 import { Capacitor } from "@capacitor/core";
+import { LANGUAGES } from "./shared/constants";
+import { ConfigService } from "./shared/services/config.service";
 
 @Component({
   selector: "app-root",
@@ -69,7 +69,7 @@ export class AppComponent {
       if (Capacitor.isNativePlatform()) {
         this.updateStatusBar();
       } else {
-        this.configService.isDarkMode ? document.body.classList.add("dark") : document.body.classList.remove("dark");
+        this.setMode();
       }
     }
   }
@@ -87,8 +87,18 @@ export class AppComponent {
       }
       const color = this.configService.isDarkMode ? '#222428' : '#2a5ba7';
       StatusBar.setBackgroundColor({color});
-      this.configService.isDarkMode ? document.body.classList.add("dark") : document.body.classList.remove("dark");
+      this.setMode();
     });
+  }
+
+  private setMode() {
+    if (this.configService.isDarkMode) {
+      if (!document.body.classList.contains("dark")) {
+        document.body.classList.add("dark")
+      }
+    } else {
+      document.body.classList.remove("dark");
+    }
   }
 
 }

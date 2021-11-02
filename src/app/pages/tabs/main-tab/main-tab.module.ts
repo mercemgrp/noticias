@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MainTabPage } from './main-tab.page';
-import { ComponentsModule } from 'src/app/components/components.module';
 import { MainTabPageRoutingModule } from './main-tab-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from 'src/app/shared/shared.module';
 @NgModule({
   imports: [
     IonicModule,
@@ -13,7 +13,7 @@ import { TranslateModule } from '@ngx-translate/core';
     FormsModule,
     TranslateModule,
     MainTabPageRoutingModule,
-    ComponentsModule,
+    SharedModule,
   ],
   declarations: [MainTabPage]
 })

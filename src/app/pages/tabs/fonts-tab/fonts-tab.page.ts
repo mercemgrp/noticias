@@ -1,19 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Subject } from 'rxjs';
 import { first, finalize, tap, map, takeUntil } from 'rxjs/operators';
-import { AnimationsService } from 'src/app/services/animations.service';
-import { ConfigService } from 'src/app/services/config.service';
-import { NewsService } from 'src/app/services/news.service';
-import { StorageService } from 'src/app/services/storage.service ';
-import { SourceDTO } from 'src/app/models/dtos';
-import { ArticlesConfig, ArticleUi, Menu } from 'src/app/models/ui';
+import { SourceDTO } from 'src/app/shared/models/dtos';
+import { ArticleUi, ArticlesConfig, Menu } from 'src/app/shared/models/ui';
+import { AnimationsService } from 'src/app/shared/services/animations.service';
+import { ConfigService } from 'src/app/shared/services/config.service';
+import { NewsService } from 'src/app/shared/services/news.service';
+import { StorageService } from 'src/app/shared/services/storage.service ';
 @Component({
   selector: 'app-fonts-tab',
   templateUrl: 'fonts-tab.page.html',
   styleUrls: ['fonts-tab.page.scss']
 })
 export class FontsTabPage {
+  @ViewChild("headerTmpl") header: HTMLElement;
   currentFont: SourceDTO;
   articles: ArticleUi[];
   articlesConfig: ArticlesConfig = {
@@ -35,7 +36,10 @@ export class FontsTabPage {
     private newsService: NewsService,
     private storageService: StorageService,
     private animationsService: AnimationsService,
-    private iab: InAppBrowser) {
+    private iab: InAppBrowser,
+    public element: ElementRef, 
+    public renderer: Renderer2
+) {
   }
 
   ngOnInit() {
@@ -71,7 +75,12 @@ export class FontsTabPage {
 
   onScroll(e) : void {
     console.log('onScroll font', e);
-    this.scrollingDown = this.scrollPosition < e.detail.scrollTop;
+    const downDirection = this.scrollPosition < e.detail.scrollTop;
+    if (downDirection && !this.scrollingDown) {
+      this.scrollingDown = true;
+    } else if(!downDirection && this.scrollingDown) {
+      this.scrollingDown = false;
+    }
     this.scrollPosition = e.detail.scrollTop;
   }
 

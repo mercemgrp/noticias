@@ -8,17 +8,17 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EnvironmentService } from './services/environment.service';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ShellModule } from './shell/menu/shell.module';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { ConfigService } from './services/config.service';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import {IonicStorageModule} from '@ionic/storage-angular';
-import { StorageService } from './services/storage.service ';
 import { registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es';
+import { ConfigService } from './shared/services/config.service';
+import { EnvironmentService } from './shared/services/environment.service';
+import { StorageService } from './shared/services/storage.service ';
 
 export function initConfig(env: EnvironmentService, conf: ConfigService, storage: StorageService) {
   return () => {
