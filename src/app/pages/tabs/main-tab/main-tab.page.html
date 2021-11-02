@@ -1,6 +1,6 @@
-<app-header [title]="'SECTIONS.ARTICLES' | translate"></app-header>
+<app-header [title]="'SECTIONS.ARTICLES' | translate" [hide]="scrollingDown"></app-header>
 
-<ion-content class="u-padding">
+<ion-content class="u-padding" [scrollEvents]="true" (ionScroll)="onScroll($event)">
   <app-new-skeleton *ngIf="firstLoading"></app-new-skeleton>
   <app-alert *ngIf="error" [message]="'MESSAGES.ERROR_LOADING' | translate" [attributes]=""></app-alert>
   <ng-container *ngTemplateOutlet="!firstLoading && !error && articlesTmpl"></ng-container>

@@ -147,7 +147,7 @@ export class FontsTabPage {
   }
 
   private setCurrentFont() {
-    this.currentFont = this.sources.find(source => source.id === this.fontSelected);
+    this.currentFont = this.sources?.find(source => source.id === this.fontSelected);
   }
 
   private updateFavorites() {

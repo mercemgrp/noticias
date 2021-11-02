@@ -1,12 +1,13 @@
 import { Platform } from "@ionic/angular";
 import { Component } from "@angular/core";
-import { SplashScreen } from "@ionic-native/splash-screen/ngx";
-import { StatusBar } from "@ionic-native/status-bar/ngx";
+import { SplashScreen } from "@capacitor/splash-screen";
 import { ConfigService } from "./services/config.service";
 import { map, takeUntil, tap } from "rxjs/operators";
 import { TranslateService } from "@ngx-translate/core";
 import { Subject } from "rxjs";
 import { LANGUAGES } from "./constants";
+import { StatusBar } from "@capacitor/status-bar";
+import { Capacitor } from "@capacitor/core";
 
 @Component({
   selector: "app-root",
@@ -17,8 +18,6 @@ export class AppComponent {
   private ngUnsubscribe = new Subject<void>();
   constructor(
     private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
     private configService: ConfigService,
     private translate: TranslateService
   ) {
@@ -27,11 +26,8 @@ export class AppComponent {
 
   ngOnInit() {
     this.initializeLangService();
-    this.configService.languageChanges$
-      .pipe(
-        tap(lang => this.translate.use(lang || LANGUAGES.ES)),
-        takeUntil(this.ngUnsubscribe))  
-      .subscribe();
+    this.subscribeConfigurationChanges();
+    this.subscribeLangChanges();
   }
 
   ngOnDestroy() {
@@ -39,12 +35,27 @@ export class AppComponent {
     this.ngUnsubscribe.complete();
   }
 
-  initializeApp() {
+  private initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-      this.subscribeConfigurationChanges();
+      if (Capacitor.isNativePlatform()) {
+        SplashScreen.hide();
+        StatusBar.hide();
+        StatusBar.setOverlaysWebView({overlay: false});
+      }
     });
+  }
+
+  private subscribeLangChanges() {
+    this.configService.languageChanges$
+      .pipe(
+        tap(lang => {
+          if (lang) {
+            this.translate.use(lang);
+          }
+        }),
+        takeUntil(this.ngUnsubscribe)
+      )  
+      .subscribe();
   }
 
   private subscribeConfigurationChanges() {
@@ -55,7 +66,11 @@ export class AppComponent {
 
   private changeMode() {
     if (this.configService.isDarkMode !== undefined) {
-      this.configService.isDarkMode ? document.body.classList.add("dark") : document.body.classList.remove("dark");
+      if (Capacitor.isNativePlatform()) {
+        this.updateStatusBar();
+      } else {
+        this.configService.isDarkMode ? document.body.classList.add("dark") : document.body.classList.remove("dark");
+      }
     }
   }
 
@@ -64,4 +79,16 @@ export class AppComponent {
     this.translate.addLangs([LANGUAGES.ES, LANGUAGES.EN]);
     this.translate.use(this.configService.language);
   }
+
+  private updateStatusBar() {
+    StatusBar.getInfo().then(info => {
+      if (!info.visible) {
+        StatusBar.show();
+      }
+      const color = this.configService.isDarkMode ? '#222428' : '#2a5ba7';
+      StatusBar.setBackgroundColor({color});
+      this.configService.isDarkMode ? document.body.classList.add("dark") : document.body.classList.remove("dark");
+    });
+  }
+
 }

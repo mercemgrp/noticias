@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+
+import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 import { tap, first, finalize, takeUntil } from 'rxjs/operators';
 import { ArticleUi } from 'src/app/models/ui/article-ui';
@@ -6,16 +7,17 @@ import { AnimationsService } from 'src/app/services/animations.service';
 import { ConfigService } from 'src/app/services/config.service';
 import { NewsService } from 'src/app/services/news.service';
 import { StorageService } from 'src/app/services/storage.service ';
-
 @Component({
   selector: 'app-main-tab',
   templateUrl: 'main-tab.page.html',
   styleUrls: ['main-tab.page.scss']
 })
-export class MainTabPage {
+export class MainTabPage implements OnInit {
   articles: ArticleUi[];
   error = false;
   firstLoading = false;
+  scrollPosition = 0;
+  scrollingDown = false;
   private ngUnsubscribe = new Subject<void>();
   constructor(
     private newsService: NewsService,
@@ -23,7 +25,6 @@ export class MainTabPage {
     private configService: ConfigService,
     private animationsService: AnimationsService) {
   }
-
   ngOnInit() {
     this.configService.languageChanges$
       .pipe(
@@ -39,16 +40,23 @@ export class MainTabPage {
         tap(_ => this.updateFavorites()),
         takeUntil(this.ngUnsubscribe))  
       .subscribe();
+  
   }
-
+  
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
 
   ionViewWillEnter() {
-    this.getTopHeadlines();
-    
+    this.getTopHeadlines();  
+  }
+
+  onScroll(e) : void {
+    console.log(e.detail.scrollTop);
+    this.scrollingDown = this.scrollPosition < e.detail.scrollTop;
+    this.scrollPosition = e.detail.scrollTop;
+    console.log('scrollingDown', this.scrollingDown);
   }
 
   onToggleFavorite(article: ArticleUi) {

@@ -1,4 +1,4 @@
-<ion-header class="my-header" [translucent]="true">
+<ion-header class="my-header" [translucent]="true" *ngIf="!hide">
   <ion-toolbar > 
     <ion-title color="primary">{{title | translate}}</ion-title>
     <ion-buttons  slot="end">

@@ -7,6 +7,7 @@ import { TabsPageRoutingModule } from './tabs-routing.module';
 
 import { TabsPage } from './tabs.page';
 import { TranslateModule } from '@ngx-translate/core';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     FormsModule,
     TabsPageRoutingModule,
-    TranslateModule
+    TranslateModule,
+    ComponentsModule
   ],
   declarations: [TabsPage]
 })

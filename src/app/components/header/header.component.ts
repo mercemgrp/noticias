@@ -11,6 +11,7 @@ export class HeaderComponent {
 
   @Input() title: string;
   @Input() menus: Menu[];
+  @Input() hide: boolean;
   @Output() menuChangesEv = new EventEmitter();
 
   constructor(private menu: MenuController) {}
