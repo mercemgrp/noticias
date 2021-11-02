@@ -109,7 +109,6 @@ export class FontsTabPage {
             title: source.name
           }
         });
-        debugger;
         this.fontSelected = this.menus[0]?.id;
         this.setCurrentFont();
         this.getHeadlinesByDomain(this.fontSelected);
@@ -125,7 +124,6 @@ export class FontsTabPage {
       .pipe(
         first(),
         finalize(() => {
-          debugger;
           this.firstLoading = false;
           if (e) {
             e.target.complete();
@@ -133,7 +131,6 @@ export class FontsTabPage {
         })
       ).subscribe(
         news => {
-          debugger;
           this.articles.push( ...news.map((currentNew, i) => {
             return {
               id: 'fontId_' + this.fontSelected +'_' + this.articles.length + i,
@@ -144,8 +141,6 @@ export class FontsTabPage {
           if (!news.length && e) {
             e.target.disabled = true;
           }
-          debugger;
-          
         },
         _ => this.error = true
       );

@@ -29,7 +29,7 @@ export class AppComponent {
     this.initializeLangService();
     this.configService.languageChanges$
       .pipe(
-        tap(lang => this.translate.use(lang)),
+        tap(lang => this.translate.use(lang || LANGUAGES.ES)),
         takeUntil(this.ngUnsubscribe))  
       .subscribe();
   }
