@@ -1,4 +1,6 @@
-<ion-header [class.transition-margin-top-700]="!menus" [class.transition-margin-top-1400]="menus" [class]="'my-header my-header-'+ id " [translucent]="true"
+<ion-header 
+[class]="'my-header my-header-'+ id " [translucent]="true"
+[class]="{'transition-margin-top-1400': menus, 'transition-margin-top-700': !menus}"
 [class.marginTop44]="hide && !menus"
 [class.marginTop360]="hide && menus">
   <ion-toolbar > 
