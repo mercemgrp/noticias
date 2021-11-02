@@ -53,10 +53,9 @@ export class MainTabPage implements OnInit {
   }
 
   onScroll(e) : void {
-    console.log(e.detail.scrollTop);
     this.scrollingDown = this.scrollPosition < e.detail.scrollTop;
     this.scrollPosition = e.detail.scrollTop;
-    console.log('scrollingDown', this.scrollingDown);
+    console.log('onScroll main', e);
   }
 
   onToggleFavorite(article: ArticleUi) {

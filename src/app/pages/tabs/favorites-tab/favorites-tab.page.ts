@@ -18,6 +18,8 @@ export class FavoritesTabPage {
   };
   error: boolean;
   firstLoading: boolean;
+  scrollPosition = 0;
+  scrollingDown = false;
   private ngUnsubscribe = new Subject<void>();
   constructor(
     private storageService: StorageService,
@@ -39,6 +41,13 @@ export class FavoritesTabPage {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
+
+  onScroll(e) : void {
+    this.scrollingDown = this.scrollPosition < e.detail.scrollTop;
+    this.scrollPosition = e.detail.scrollTop;
+    console.log('onScroll fav', e);
+  }
+
 
   onToggleFavorite(event: ArticleUi) {
     this.storageService.toggleFavorite(event.article)

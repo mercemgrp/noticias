@@ -23,13 +23,12 @@ export class FontsTabPage {
   sources: SourceDTO[];
   menus: Menu[] = [{
     id: 'test',
-    title: '         '
-  }, {
-    id: 'test',
-    title: '         '
+    title: ' '
   }];
   fontSelected: string;
   firstLoading: boolean;
+  scrollPosition = 0;
+  scrollingDown = false;
   private ngUnsubscribe = new Subject<void>();
   constructor(
     private configService: ConfigService,
@@ -68,6 +67,12 @@ export class FontsTabPage {
     } else {
       this.getHeadlinesByDomain(this.fontSelected);
     }
+  }
+
+  onScroll(e) : void {
+    console.log('onScroll font', e);
+    this.scrollingDown = this.scrollPosition < e.detail.scrollTop;
+    this.scrollPosition = e.detail.scrollTop;
   }
 
   onFontChanged(fontId) {

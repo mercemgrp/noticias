@@ -40,6 +40,8 @@ export class CategoriesTabPage {
   ];
   categorySelected: string;
   firstLoading: boolean;
+  scrollPosition = 0;
+  scrollingDown = false;
   private ngUnsubscribe = new Subject<void>();
   constructor(
     private configService: ConfigService,
@@ -74,8 +76,14 @@ export class CategoriesTabPage {
 
   ionViewWillEnter() {
     this.getHeadlinesByCategory(this.categorySelected);
-    
   }
+
+  onScroll(e) : void {
+    this.scrollingDown = this.scrollPosition < e.detail.scrollTop;
+    this.scrollPosition = e.detail.scrollTop;
+    console.log('onScroll cat', e);
+  }
+
 
   onCategoryChanged(categoryId) {
     this.categorySelected = categoryId;

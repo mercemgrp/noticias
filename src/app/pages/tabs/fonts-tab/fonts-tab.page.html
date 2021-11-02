@@ -1,6 +1,6 @@
-<app-header [title]="'SECTIONS.FONTS' | translate" [menus]="menus" (menuChangesEv)="onFontChanged($event)"></app-header>
+<app-header [title]="'SECTIONS.FONTS' | translate" [menus]="menus" [hide]="scrollingDown" (menuChangesEv)="onFontChanged($event)"></app-header>
 
-<ion-content class="fonts-tab-page u-padding">
+<ion-content class="fonts-tab-page u-padding" (ionScroll)="onScroll($event)">
 
   <app-new-skeleton *ngIf="firstLoading"></app-new-skeleton>
   <app-alert *ngIf="error" [message]="'MESSAGES.ERROR_LOADING' | translate" [attributes]=""></app-alert>
@@ -20,6 +20,5 @@
       </ion-text>
     </a>
   </h1>
-  <ion-searchbar *ngIf="articles?.length" showCancelButton="focus"></ion-searchbar>
   <app-articles [articles]="articles" [config]="articlesConfig" (toggleFavoriteEv)="onToggleFavorite($event)"></app-articles>
 </ng-template>

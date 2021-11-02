@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { TabMenu } from 'src/app/models/ui/tabs';
 
 @Component({
   selector: 'app-tabs',
@@ -8,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['tabs.page.scss']
 })
 export class TabsPage {
-  tabsMenu = [
+  tabsMenu: TabMenu[] = [
     {
       id: 'articles',
       title: 'SECTIONS.ARTICLES',
@@ -38,16 +39,25 @@ export class TabsPage {
       iconSelected: 'star-outline'
     }
   ];
-  tabSelected;
+  tabSelected: TabMenu;
+  scrollPosition = 0;
+  scrollingDown = false;
   constructor(
-    private router: Router,
-    private translateService: TranslateService
+    private router: Router
   ) {
-    this.tabSelected = this.tabsMenu.find(tab => tab.route === this.router.url)?.id || this.tabsMenu[0];
+    this.tabSelected = this.tabsMenu.find(tab => tab.route === this.router.url) || this.tabsMenu[0];
   }
 
-  onSelectTab(event) {
-    this.tabSelected = event?.currentTarget?.tab || this.tabSelected;
+  onScroll(e) : void {
+    console.log(e.detail.scrollTop);
+    this.scrollingDown = this.scrollPosition < e.detail.scrollTop;
+    this.scrollPosition = e.detail.scrollTop;
+    console.log('scrollingDown', this.scrollingDown);
+  }
+
+  onSelectTab(e) {
+    const tabId = e?.currentTarget?.tab;
+    this.tabSelected = tabId ? this.tabsMenu.find(tab => tab.id === tabId) : null;
     console.log(this.tabSelected);
   }
   
