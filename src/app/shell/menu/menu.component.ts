@@ -10,7 +10,7 @@ import { MODES, LANGUAGES } from 'src/app/constants';
 })
 export class MenuComponent implements OnInit {
   get nightMode() {
-    return this.config.mode === MODES.DARK;
+    return this.config.deviceIsDarkMode;
   }
   get spanishLanguage() {
     return this.config.language === LANGUAGES.ES;

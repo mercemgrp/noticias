@@ -1,0 +1,28 @@
+{
+  "MENU": {
+    "TITLE": "Menu",
+    "LANGUAGE": "Language",
+    "MODE": "Mode"
+  },
+  "SECTIONS": {
+    "ARTICLES": "Articles",
+    "HEADERS": "Headers",
+    "FONTS": "Fonts",
+    "FAVORITES": "Favorites"
+  },
+  "CATEGORIES": {
+    "BUSINESS": "Business",
+    "ENTERTAINMENT": "Entertainment",
+    "GENERAL": "General",
+    "HEALTH": "Health",
+    "SCIENCE": "Science",
+    "SPORTS": "Sports",
+    "TECHNOLOGY": "Technology"
+  },
+  "MESSAGES": {
+    "NO_ARTICLES": "There is no news at the moment",
+    "ERROR_LOADING": "Error!",
+    "LOADING": "Loading more news...",
+    "NO_FAVORITES": "No favorites"
+  }
+}

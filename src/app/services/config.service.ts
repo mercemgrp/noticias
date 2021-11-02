@@ -4,6 +4,7 @@ import { catchError, first, map } from 'rxjs/operators';
 import { MODES, LANGUAGES} from '../constants';
 import { Configuration } from '../models/ui';
 import { ConfigurationDTO } from '../models/dtos';
+import { TranslateService } from '@ngx-translate/core';
 
 Injectable({
   providedIn: 'root'

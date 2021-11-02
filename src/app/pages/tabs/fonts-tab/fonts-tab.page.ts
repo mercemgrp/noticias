@@ -40,12 +40,9 @@ export class FontsTabPage {
   }
 
   ngOnInit() {
-    this.firstLoading = true;
     this.configService.languageChanges$
       .pipe(
-        tap(_ => {
-            this.getSources();
-        }),
+        tap(_ => this.getSources()),
         takeUntil(this.ngUnsubscribe)
       )  
       .subscribe();
@@ -93,6 +90,7 @@ export class FontsTabPage {
   }
 
   private getSources() {
+    this.firstLoading = true;
     this.newsService.getSources()
     .pipe(
       first(),

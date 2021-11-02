@@ -5,12 +5,14 @@ import { FormsModule } from '@angular/forms';
 import { FontsTabPage } from './fonts-tab.page';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { FontsTabPageRoutingModule } from './fonts-tab-routing.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
+    TranslateModule,
     FontsTabPageRoutingModule,
     ComponentsModule
   ],

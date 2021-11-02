@@ -1,8 +1,8 @@
-<app-header title="Noticias" [menus]="categories" (menuChangesEv)="onCategoryChanged($event)"></app-header>
+<app-header [title]="'SECTIONS.HEADERS' | translate" [menus]="categories" (menuChangesEv)="onCategoryChanged($event)"></app-header>
 
 <ion-content class="u-padding">
   <app-new-skeleton *ngIf="firstLoading"></app-new-skeleton>
-  <app-alert *ngIf="error" [message]="'Ha ocurrido un error cargando las noticias.'" [attributes]=""></app-alert>
+  <app-alert *ngIf="error"  [message]="'MESSAGES.ERROR_LOADING' | translate" [attributes]=""></app-alert>
   <ng-container *ngTemplateOutlet="!firstLoading && !error && articlesTmpl"></ng-container>
   <ion-infinite-scroll threshold="25%" [disabled]="false" position="bottom" (ionInfinite)="onLoadNextHeadlines($event)">
     <ion-infinite-scroll-content firstLoadingSpinner="bubbles" firstLoadingText="Cargando más noticias...">
@@ -11,6 +11,6 @@
 </ion-content>
 
 <ng-template #articlesTmpl>
-  <app-alert *ngIf="!articles?.length" [message]="'No hay noticias.'" [attributes]=""></app-alert>
+  <app-alert *ngIf="!articles?.length" [message]="'MESSAGES.NO_ARTICLES' | translate" [attributes]=""></app-alert>
   <app-articles [articles]="articles" (toggleFavoriteEv)="onToggleFavorite($event)"></app-articles>
 </ng-template>

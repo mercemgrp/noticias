@@ -1,7 +1,7 @@
 <ion-menu side="end" contentId="main" menuId="mainMenu">
   <ion-header>
     <ion-toolbar >
-      <ion-title color="primary">Menú</ion-title>
+      <ion-title color="primary">{{'MENU.TITLE' | translate}}</ion-title>
       <ion-buttons slot="end">
         <ion-button (click)="onCloseMainMenu()">
           <ion-icon slot="icon-only" name="close" class="menu-icon"></ion-icon>
@@ -12,13 +12,13 @@
   <ion-content >
     <ion-list>
       <ion-item>
-        <ion-label slot="start" >Idioma</ion-label>
+        <ion-label slot="start" >{{'MENU.LANGUAGE' | translate}}</ion-label>
         <ion-text [color]="spanishLanguage? 'primary' : 'dark'">ES</ion-text>
         <ion-toggle [checked]="!spanishLanguage" name="mode" color="primary" (ionChange)="onToggleLanguage()"></ion-toggle>
         <ion-text [color]="spanishLanguage ? 'dark' : 'primary'">EN</ion-text>
       </ion-item>
       <ion-item>
-        <ion-label slot="start" >Modo</ion-label>
+        <ion-label slot="start" >{{'MENU.MODE' | translate}}</ion-label>
         <ion-icon [color]="nightMode ? 'dark' : 'primary'" name="sunny"></ion-icon> 
         <ion-toggle [checked]="nightMode" name="mode" color="primary"  (ionChange)="onToggleNightMode()"></ion-toggle>
         <ion-icon [color]="nightMode ? 'primary' : 'dark'" name="moon"></ion-icon>

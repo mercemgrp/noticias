@@ -6,12 +6,14 @@ import { CategoriesTabPage } from './categories-tab.page';
 
 import { ComponentsModule } from 'src/app/components/components.module';
 import { CategoriesTabPageRoutingModule } from './categories-tab-routing.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
+    TranslateModule,
     CategoriesTabPageRoutingModule,
     ComponentsModule
   ],

@@ -17,25 +17,25 @@ export class CategoriesTabPage {
   error = false;
   categories: Menu[] = [{
     id: 'business',
-    title: 'Negocios'
+    title: 'CATEGORIES.BUSINESS'
   }, {
     id: 'entertainment',
-    title: 'Entretenimiento'
+    title: 'CATEGORIES.ENTERTAINMENT'
   }, {
     id: 'general',
-    title: 'General'
+    title: 'CATEGORIES.GENERAL'
   }, {
     id: 'health',
-    title: 'Salud'
+    title: 'CATEGORIES.HEALTH'
   }, {
     id: 'science',
-    title: 'Ciencia'
+    title: 'CATEGORIES.SCIENCE'
   },{
     id: 'sports',
-    title: 'Deportes'
+    title: 'CATEGORIES.SPORTS'
   },{
     id: 'technology',
-    title: 'Tecnología'
+    title: 'CATEGORIES.TECHNOLOGY'
   }
   ];
   categorySelected: string;
