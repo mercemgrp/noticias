@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { catchError, first, map } from 'rxjs/operators';
 import { MODES, LANGUAGES} from '../constants';
 import { Configuration } from '../models/ui';
 import { ConfigurationDTO } from '../models/dtos';
-import { TranslateService } from '@ngx-translate/core';
+import { Storage } from '@ionic/storage';
 
-Injectable({
+const CONFIG_KEY = 'configuration';
+@Injectable({
   providedIn: 'root'
 })
 export class ConfigService {
@@ -27,39 +27,45 @@ export class ConfigService {
   private modeSubject =  new BehaviorSubject<MODES>(undefined);
   languageChanges$: Observable<LANGUAGES>;
   modeChanges$: Observable<MODES>;
-  constructor() {
+  constructor(private storage: Storage) {
     this.languageChanges$ = this.languageSubject.asObservable();
     this.modeChanges$ = this.modeSubject.asObservable();
     }
 
   saveMode(mode: MODES) {
-    this.config.mode = mode;
-    this.modeSubject.next(this.config.mode);
+    const config = {...this.config, mode: mode};
+    return this.storage.set(CONFIG_KEY,config).then(_ => {
+      this.config = config;
+      this.modeSubject.next(this.config.mode);
+    }
+    ).catch(_ =>
+      this.modeSubject.next(this.config.mode)
+    )
   }
 
   saveLanguage(lang: LANGUAGES) {
-    this.config.language = lang;
-    this.languageSubject.next(this.config.language);
+    const config = {...this.config, language: lang};
+    return this.storage.set(CONFIG_KEY,config).then(_ => {
+      this.config = config;
+      this.languageSubject.next(this.config.language);
+    }
+    ).catch(_ =>
+      this.languageSubject.next(this.config.language)
+    )
   }
 
   loadConfig() {
-    return of<ConfigurationDTO>({
-      mode: MODES.DEVICE_DEFAULT,
-      language: LANGUAGES.ES
-    }).pipe(
-      first(),
-      catchError(() => {
-        return of(false);
-      }),
-      map((configResponse: ConfigurationDTO) => {
-        if (configResponse) {
+    return this.storage.create().then(() => {
+      return this.storage.get(CONFIG_KEY).then(
+        (resp: ConfigurationDTO) => {
           this.config = {
-            ...configResponse,
+            language: resp?.language || LANGUAGES.ES,
+            mode: resp?.mode || MODES.DEVICE_DEFAULT,
             deviceIsDarkMode: window.matchMedia('(prefers-color-scheme: dark)').matches
             };
-            return this.config;
+          return this.config;
         }
-      })
-    )
+      );
+    });
   }
 }

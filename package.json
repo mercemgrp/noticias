@@ -12,6 +12,7 @@
     "e2e": "ng e2e",
     "lab": "ionic serve --lab",
     "android": "ionic build && ionic cap copy && ionic cap sync && ionic cap open android",
+    "device-list": "ionic build && ionic capacitor run android --list",
     "device": "ionic build && ionic capacitor run android --target 327d7d5e"
   },
   "private": true,

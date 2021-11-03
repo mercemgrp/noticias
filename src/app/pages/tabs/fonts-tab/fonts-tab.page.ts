@@ -132,6 +132,7 @@ export class FontsTabPage {
       .pipe(
         first(),
         finalize(() => {
+          console.log('finalize');
           this.firstLoading = false;
           if (e) {
             e.target.complete();

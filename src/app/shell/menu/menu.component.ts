@@ -10,7 +10,7 @@ import { ConfigService } from 'src/app/shared/services/config.service';
 })
 export class MenuComponent implements OnInit {
   get nightMode() {
-    return this.config.deviceIsDarkMode;
+    return this.configService.isDarkMode;
   }
   get spanishLanguage() {
     return this.config.language === LANGUAGES.ES;
@@ -31,12 +31,12 @@ export class MenuComponent implements OnInit {
 
   onToggleNightMode() {
     const newMode = this.config.mode === MODES.DARK ? MODES.LIGHT : MODES.DARK;
-    this.configService.saveMode(newMode);
+    this.configService.saveMode(newMode).catch(_ => this.config.mode === MODES.DARK ? MODES.LIGHT : MODES.DARK);
   }
 
   onToggleLanguage() {
     const newLang = this.config.language === LANGUAGES.ES ? LANGUAGES.EN : LANGUAGES.ES;
-    this.configService.saveLanguage(newLang);
+    this.configService.saveLanguage(newLang).catch(_ => this.config.language === LANGUAGES.ES ? LANGUAGES.EN : LANGUAGES.ES);
   }
 
 }

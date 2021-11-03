@@ -23,7 +23,7 @@ import { StorageService } from './shared/services/storage.service ';
 export function initConfig(env: EnvironmentService, conf: ConfigService, storage: StorageService) {
   return () => {
     env.loadEnvironmentKeys();
-    return conf.loadConfig().subscribe(() => storage.initStorage());
+    return conf.loadConfig().then(() => storage.initStorage());
   }
 }
 

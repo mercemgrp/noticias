@@ -1,9 +1,8 @@
-<ion-header 
-[class]="'my-header my-header-'+ id " [translucent]="true"
-[class]="{'transition-margin-top-1400': menus, 'transition-margin-top-700': !menus}"
-[class.marginTop44]="hide && !menus"
-[class.marginTop360]="hide && menus">
-  <ion-toolbar > 
+<ion-header [translucent]="true"
+[class]="{'my-header': true, 'transition-margin-top-1400': menus, 'transition-margin-top-700': !menus,
+    'marginTop44': hide && !menus, 'marginTop360': hide && menus
+  }">
+  <ion-toolbar> 
     <ion-title color="primary">{{title | translate}}</ion-title>
     <ion-buttons  slot="end">
       <ion-button (click)="onOpenMainMenu()">
