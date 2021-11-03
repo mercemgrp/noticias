@@ -4,7 +4,7 @@ import { takeUntil, tap } from 'rxjs/operators';
 import { ArticleDTO } from 'src/app/shared/models/dtos';
 import { ArticleUi, ArticlesConfig } from 'src/app/shared/models/ui';
 import { AnimationsService } from 'src/app/shared/services/animations.service';
-import { StorageService } from 'src/app/shared/services/storage.service ';
+import { FavoritesStorageService } from 'src/app/shared/services/favorites-storage.service ';
 
 @Component({
   selector: 'app-favorites-tab',
@@ -22,7 +22,7 @@ export class FavoritesTabPage {
   scrollingDown = false;
   private ngUnsubscribe = new Subject<void>();
   constructor(
-    private storageService: StorageService,
+    private storageService: FavoritesStorageService,
     private animationService: AnimationsService) {
     
   }

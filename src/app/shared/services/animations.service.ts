@@ -23,9 +23,7 @@ export class AnimationsService {
     return createAnimation()
     .addElement(document.querySelector('.article-container-' + id))
     .duration(1000)
-    //.fromTo('transform', 'translate(0%)', 'translate(50%)')
-    .fromTo('opacity', '1', '0')
-  //  .afterAddClass('ion-hide');
+    .fromTo('opacity', '1', '0');
   }
 
 }

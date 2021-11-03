@@ -18,12 +18,12 @@ import { registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es';
 import { ConfigService } from './shared/services/config.service';
 import { EnvironmentService } from './shared/services/environment.service';
-import { StorageService } from './shared/services/storage.service ';
+import { FavoritesStorageService } from './shared/services/favorites-storage.service ';
 
-export function initConfig(env: EnvironmentService, conf: ConfigService, storage: StorageService) {
+export function initConfig(env: EnvironmentService, conf: ConfigService, storage: FavoritesStorageService) {
   return () => {
     env.loadEnvironmentKeys();
-    return conf.loadConfig().then(() => storage.initStorage());
+    return conf.loadConfig().then(_ => storage.loadFavorites());
   }
 }
 
@@ -48,12 +48,12 @@ registerLocaleData(localeES, 'es');
   providers: [
     EnvironmentService,
     ConfigService,
-    StorageService,
+    FavoritesStorageService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     {
       provide: APP_INITIALIZER,
       useFactory: initConfig,
-      deps: [EnvironmentService, ConfigService, StorageService],
+      deps: [EnvironmentService, ConfigService, FavoritesStorageService],
       multi: true,
     },
     InAppBrowser,

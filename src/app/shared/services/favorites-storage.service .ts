@@ -8,7 +8,7 @@ const FAVORITES_KEY = 'favorites-news';
   
   providedIn: 'root'
 })
-export class StorageService {
+export class FavoritesStorageService {
   get favoritesHeadlines() {
     return [...this.favorites];
   }
@@ -22,17 +22,13 @@ export class StorageService {
     this.favoritesChanges$ = this.favoritesChangesSubject.asObservable();
   }
 
-  initStorage(): Promise<boolean> {
-    // return this.storage.create().then(() => {
-      console.log('create storage');
+  loadFavorites(): Promise<boolean> {
       return this.storage.get(FAVORITES_KEY).then(
         (resp: ArticleDTO[]) => {
-          console.log('get storage', resp);
           this.favorites = resp || [];
           return true;
         }
       );
-    // });
   }
 
   toggleFavorite(articleSelected: ArticleDTO): Promise<ArticleDTO[]> {

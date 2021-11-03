@@ -1,4 +1,4 @@
-import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Subject } from 'rxjs';
 import { first, finalize, tap, map, takeUntil } from 'rxjs/operators';
@@ -7,7 +7,7 @@ import { ArticleUi, ArticlesConfig, Menu } from 'src/app/shared/models/ui';
 import { AnimationsService } from 'src/app/shared/services/animations.service';
 import { ConfigService } from 'src/app/shared/services/config.service';
 import { NewsService } from 'src/app/shared/services/news.service';
-import { StorageService } from 'src/app/shared/services/storage.service ';
+import { FavoritesStorageService } from 'src/app/shared/services/favorites-storage.service ';
 @Component({
   selector: 'app-fonts-tab',
   templateUrl: 'fonts-tab.page.html',
@@ -34,11 +34,9 @@ export class FontsTabPage {
   constructor(
     private configService: ConfigService,
     private newsService: NewsService,
-    private storageService: StorageService,
+    private storageService: FavoritesStorageService,
     private animationsService: AnimationsService,
-    private iab: InAppBrowser,
-    public element: ElementRef, 
-    public renderer: Renderer2
+    private iab: InAppBrowser
 ) {
   }
 

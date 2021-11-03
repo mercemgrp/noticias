@@ -6,7 +6,7 @@ import { ArticleUi } from 'src/app/shared/models/ui';
 import { AnimationsService } from 'src/app/shared/services/animations.service';
 import { ConfigService } from 'src/app/shared/services/config.service';
 import { NewsService } from 'src/app/shared/services/news.service';
-import { StorageService } from 'src/app/shared/services/storage.service ';
+import { FavoritesStorageService } from 'src/app/shared/services/favorites-storage.service ';
 
 @Component({
   selector: 'app-main-tab',
@@ -22,7 +22,7 @@ export class MainTabPage implements OnInit {
   private ngUnsubscribe = new Subject<void>();
   constructor(
     private newsService: NewsService,
-    private storageService: StorageService,
+    private storageService: FavoritesStorageService,
     private configService: ConfigService,
     private animationsService: AnimationsService) {
   }
