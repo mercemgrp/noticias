@@ -7,6 +7,8 @@ import { AnimationsService } from 'src/app/shared/services/animations.service';
 import { ConfigService } from 'src/app/shared/services/config.service';
 import { NewsService } from 'src/app/shared/services/news.service';
 import { FavoritesStorageService } from 'src/app/shared/services/favorites-storage.service ';
+import { ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-main-tab',
@@ -24,7 +26,9 @@ export class MainTabPage implements OnInit {
     private newsService: NewsService,
     private storageService: FavoritesStorageService,
     private configService: ConfigService,
-    private animationsService: AnimationsService) {
+    private animationsService: AnimationsService,
+    private  toastController: ToastController,
+    private translate: TranslateService) {
   }
   ngOnInit() {
     this.configService.languageChanges$
@@ -64,7 +68,7 @@ export class MainTabPage implements OnInit {
         article.selected = !article.selected;
         this.animationsService.starAnimation(article.id).play();
       })
-      .catch(_ => console.log('Mostrar error'));
+      .catch(_ => this.presentToast());
   }
 
   getTopHeadlines(e?) {
@@ -103,6 +107,17 @@ export class MainTabPage implements OnInit {
     this.articles?.forEach(article => {
      article.selected = this.storageService.favoritesHeadlines.some(favNew => article.article.title === favNew.title)
     });
+  }
+
+  private async presentToast() {
+    const toast = await this.toastController.create({
+      color: 'secondary',
+      animated: true,
+      cssClass: 'my-toast',
+      message: this.translate.instant('MESSAGES.ERROR'),
+      duration: 2000
+    });
+    toast.present();
   }
 
 }

@@ -34,8 +34,6 @@ export class HeaderComponent {
       }
     }
     if (changes.hide?.currentValue !== undefined && changes.hide.currentValue !== changes.hide?.previousValue) {
-    //  this.style= (this.hide ? 'margin-top: -44px' : '');
-      console.log('hide', this.hide);
     }
 
   }

@@ -8,6 +8,8 @@ import { AnimationsService } from 'src/app/shared/services/animations.service';
 import { ConfigService } from 'src/app/shared/services/config.service';
 import { NewsService } from 'src/app/shared/services/news.service';
 import { FavoritesStorageService } from 'src/app/shared/services/favorites-storage.service ';
+import { ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-fonts-tab',
   templateUrl: 'fonts-tab.page.html',
@@ -36,7 +38,9 @@ export class FontsTabPage {
     private newsService: NewsService,
     private storageService: FavoritesStorageService,
     private animationsService: AnimationsService,
-    private iab: InAppBrowser
+    private iab: InAppBrowser,
+    private toastController: ToastController,
+    private translate: TranslateService
 ) {
   }
 
@@ -91,7 +95,7 @@ export class FontsTabPage {
         article.selected = !article.selected;
         this.animationsService.starAnimation(article.id).play();
       })
-      .catch(_ => console.log('Mostrar error'))
+      .catch(_ => this.presentToast())
   }
 
   onLoadNextHeadlines(e) {
@@ -100,6 +104,17 @@ export class FontsTabPage {
 
   openUrl(url) {
     this.iab.create(url, '_system');
+  }
+
+  private async presentToast() {
+    const toast = await this.toastController.create({
+      color: 'secondary',
+      animated: true,
+      cssClass: 'my-toast',
+      message: this.translate.instant('MESSAGES.ERROR'),
+      duration: 2000
+    });
+    toast.present();
   }
 
   private getSources() {
@@ -130,7 +145,6 @@ export class FontsTabPage {
       .pipe(
         first(),
         finalize(() => {
-          console.log('finalize');
           this.firstLoading = false;
           if (e) {
             e.target.complete();

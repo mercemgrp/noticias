@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { MODES, LANGUAGES} from '../constants';
-import { Configuration } from '../models/ui';
 import { ConfigurationDTO } from '../models/dtos';
 import { Storage } from '@ionic/storage';
 
@@ -14,15 +13,15 @@ export class ConfigService {
     if (!this.config){
       return undefined;
     }
-    return this.config?.mode === MODES.DARK || (this.config?.mode === MODES.DEVICE_DEFAULT && this.config?.deviceIsDarkMode);
+    return this.config?.mode === MODES.DARK || (this.config?.mode === MODES.DEVICE_DEFAULT && window.matchMedia('(prefers-color-scheme: dark)').matches);
   }
   get language() {
     return this.configuration.language;
   }
-  get configuration(): Configuration {
+  get configuration(): ConfigurationDTO {
     return this.config;
   }
-  private config: Configuration;
+  private config: ConfigurationDTO;
   private languageSubject =  new BehaviorSubject<LANGUAGES>(undefined);
   private modeSubject =  new BehaviorSubject<MODES>(undefined);
   languageChanges$: Observable<LANGUAGES>;
@@ -55,14 +54,14 @@ export class ConfigService {
   }
 
   loadConfig() {
-    return this.storage.create().then(() => {
+      return this.storage.create().then(() => {
       return this.storage.get(CONFIG_KEY).then(
         (resp: ConfigurationDTO) => {
           this.config = {
             language: resp?.language || LANGUAGES.ES,
             mode: resp?.mode || MODES.DEVICE_DEFAULT,
-            deviceIsDarkMode: window.matchMedia('(prefers-color-scheme: dark)').matches
-            };
+            
+          };
           return this.config;
         }
       );

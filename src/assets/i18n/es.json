@@ -23,6 +23,7 @@
     "NO_ARTICLES": "No hay noticias",
     "ERROR_LOADING": "Ha ocurrido un error cargando las noticias.",
     "LOADING": "Cargando más noticias...",
-    "NO_FAVORITES": "No hay favoritos"
+    "NO_FAVORITES": "No hay favoritos",
+    "ERROR": "¡Ha ocurrido un error!"
   }
 }

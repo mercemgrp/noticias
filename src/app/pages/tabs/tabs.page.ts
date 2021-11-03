@@ -55,7 +55,6 @@ export class TabsPage {
   onSelectTab(e) {
     const tabId = e?.currentTarget?.tab;
     this.tabSelected = tabId ? this.tabsMenu.find(tab => tab.id === tabId) : null;
-    console.log(this.tabSelected);
   }
   
 

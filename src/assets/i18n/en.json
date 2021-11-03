@@ -23,6 +23,7 @@
     "NO_ARTICLES": "There is no news at the moment",
     "ERROR_LOADING": "Error!",
     "LOADING": "Loading more news...",
-    "NO_FAVORITES": "No favorites"
+    "NO_FAVORITES": "No favorites",
+    "ERROR": "Error!"
   }
 }

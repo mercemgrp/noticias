@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 import { ArticleDTO } from 'src/app/shared/models/dtos';
@@ -23,7 +25,9 @@ export class FavoritesTabPage {
   private ngUnsubscribe = new Subject<void>();
   constructor(
     private storageService: FavoritesStorageService,
-    private animationService: AnimationsService) {
+    private animationService: AnimationsService,
+    private toastController: ToastController,
+    private translate: TranslateService) {
     
   }
 
@@ -51,7 +55,7 @@ export class FavoritesTabPage {
   onToggleFavorite(event: ArticleUi) {
     this.storageService.toggleFavorite(event.article)
       .then(_ => this.animationService.deleteCartAnimation(event.id).play())
-      .catch(() => console.log('Mostrar error'));
+      .catch(() => this.presentToast());
   }
 
   private setFavorites() {
@@ -64,6 +68,17 @@ export class FavoritesTabPage {
     })
   }
     
+
+  private async presentToast() {
+    const toast = await this.toastController.create({
+      color: 'secondary',
+      animated: true,
+      cssClass: 'my-toast',
+      message: this.translate.instant('MESSAGES.ERROR'),
+      duration: 2000
+    });
+    toast.present();
+  }
   private updateFavorites(favAction: {article: ArticleDTO, action: string}) {
     if (!this.favorites) {
       return;

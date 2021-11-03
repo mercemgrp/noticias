@@ -1,42 +1,38 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { LANGUAGES, MODES } from 'src/app/shared/constants';
-import { Configuration } from 'src/app/shared/models/ui';
+import { ConfigurationDTO } from 'src/app/shared/models/dtos';
+
 import { ConfigService } from 'src/app/shared/services/config.service';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent {
   get nightMode() {
     return this.configService.isDarkMode;
   }
   get spanishLanguage() {
-    return this.config.language === LANGUAGES.ES;
+    return this.configService.configuration.language === LANGUAGES.ES;
   }
-  config: Configuration;
   error: boolean;
   constructor(
     private menu: MenuController,
     private configService: ConfigService) { }
-
-  ngOnInit() {
-    this.config = this.configService.configuration;
-  }
 
   onCloseMainMenu() {
     this.menu.close('mainMenu');
   }
 
   onToggleNightMode() {
-    const newMode = this.config.mode === MODES.DARK ? MODES.LIGHT : MODES.DARK;
-    this.configService.saveMode(newMode).catch(_ => this.config.mode === MODES.DARK ? MODES.LIGHT : MODES.DARK);
+    const newMode = this.configService.configuration.mode === MODES.DARK ? MODES.LIGHT : MODES.DARK;
+    this.configService.saveMode(newMode).catch(_ => this.configService.configuration.mode === MODES.DARK ? MODES.LIGHT : MODES.DARK);
   }
 
   onToggleLanguage() {
-    const newLang = this.config.language === LANGUAGES.ES ? LANGUAGES.EN : LANGUAGES.ES;
-    this.configService.saveLanguage(newLang).catch(_ => this.config.language === LANGUAGES.ES ? LANGUAGES.EN : LANGUAGES.ES);
+    const newLang = this.configService.configuration.language === LANGUAGES.ES ? LANGUAGES.EN : LANGUAGES.ES;
+    this.configService.saveLanguage(newLang).catch(_ => this.configService.configuration.language === LANGUAGES.ES ? LANGUAGES.EN : LANGUAGES.ES);
   }
 
 }
